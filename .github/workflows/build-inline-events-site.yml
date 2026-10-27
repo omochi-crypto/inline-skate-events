@@ -1,0 +1,25 @@
+name: Build inline events static site
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'events/approved.json'
+      - 'site/**'
+      - '.github/workflows/build-inline-events-site.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble public site artifact
+        run: |
+          mkdir -p public
+          cp site/index.html public/index.html
+          cp events/approved.json public/approved.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inline-events-site
+          path: public/
