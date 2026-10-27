@@ -1,0 +1,75 @@
+{
+  "checked_at": "2026-10-28",
+  "method": "ChatGPT scheduled public web search; not a GitHub Actions SNS scraper",
+  "automation_id": "6ae0c11061a88191a49505a8da97eede",
+  "scope": "Public/search-indexed posts only. Login-required/private posts and complete timeline coverage are not supported.",
+  "accounts": [
+    {
+      "id": "tokyo-roller-facebook",
+      "platform": "facebook",
+      "name": "東京都ローラースポーツ連盟",
+      "url": "https://www.facebook.com/trsf.fes/",
+      "evidence_url": "https://sc.footballnavi.jp/tokyo_roller_sports/_data/page/p_1721869366.pdf",
+      "identity_evidence": "連盟自身の大会要項がFacebookの告知先として掲載",
+      "access_status": "direct_fetch_throttled; search-index discovery only",
+      "priority": 1
+    },
+    {
+      "id": "jia-facebook",
+      "platform": "facebook",
+      "name": "日本インラインスケート協会",
+      "url": "https://www.facebook.com/Japan.Inlineskate.Association/",
+      "evidence_url": "https://www.facebook.com/Japan.Inlineskate.Association/",
+      "identity_evidence": "協会名を掲げた大会募集投稿を検索で確認。新規候補は主催者資料で再照合",
+      "access_status": "direct_fetch_unavailable; search-index discovery only",
+      "priority": 2,
+      "evidence_post_id": "1116043110504194"
+    },
+    {
+      "id": "jia-instagram",
+      "platform": "instagram",
+      "name": "日本インラインスケート協会JIA",
+      "url": "https://www.instagram.com/japaninlineskateassociation/",
+      "evidence_url": "https://www.urawa-misono.net/entry/2026inlinechallenge-saitama/",
+      "identity_evidence": "地域大会紹介記事の公式Instagram欄からリンク。投稿ごとの主催者資料照合が必要",
+      "access_status": "direct_fetch_unavailable; search-index discovery only",
+      "priority": 2
+    },
+    {
+      "id": "bunkyo-roller-facebook",
+      "platform": "facebook",
+      "name": "文京区ローラースポーツ連盟",
+      "url": "https://www.facebook.com/bunkyoroller/",
+      "evidence_url": "https://bunkyo-sports.jp/member.html",
+      "identity_evidence": "文京区スポーツ協会の加盟団体一覧が当該Facebookを連盟Webサイトとして掲載",
+      "access_status": "search_discovery; direct timeline not validated",
+      "priority": 3
+    }
+  ],
+  "queries": [
+    "site:facebook.com インライン スピード 大会 募集",
+    "site:facebook.com ウルトラスケート 長良川 エントリー",
+    "site:instagram.com インラインスケート 大会 開催",
+    "site:instagram.com japaninlineskateassociation 大会",
+    "site:x.com インラインスケート 大会 募集 -アイス -フィギュアスケート",
+    "site:x.com インラインスピード 選手権",
+    "インライン マラソン 大会 主催 Facebook Instagram"
+  ],
+  "rules": [
+    "投稿日時は開催日として使わない",
+    "終了した大会を翌年に繰り上げない",
+    "同じ大会の別名や転載は統合確認する",
+    "投稿のURLがSNSトップへ転送されたら根拠にしない",
+    "候補は人間の明示承認まで公開しない"
+  ],
+  "initial_check": {
+    "searched_platforms": [
+      "facebook",
+      "instagram",
+      "x"
+    ],
+    "findings": "Facebookに協会の募集投稿とクラブ等の参加報告を確認。Instagram検索結果はトップページに転送される例があり大会根拠には不採用。Xでは対象競技の有効な新規募集投稿を今回の検索で確認できず。全件不存在の意味ではない。",
+    "new_verified_upcoming_events": 0,
+    "limitations": "Facebook・Instagramの直接取得は失敗。検索インデックスで見える範囲のみ。定期実行は作成済み、初回の自動実行結果は未検証。"
+  }
+}

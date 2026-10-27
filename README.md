@@ -70,3 +70,7 @@ python -m http.server 8000 --directory public
 
 変更対象は `omochi-crypto/inline-skate-events` のみです。天気予報用の別リポジトリは変更しません。
 実在大会の承認をテストとして代行しません。承認経路の正例は隔離した一時ファイル、実Issueでは公開しない `/preview` を使って検証します。
+
+## SNSの補完調査
+
+公開SNSの情報は、ChatGPTの定期検索で公式サイト収集を補います。検索対象と取得制約は [events/social-sources.json](events/social-sources.json)、運用は [docs/social-monitoring.md](docs/social-monitoring.md) を参照してください。新規候補は取得元リンク付きでチャットに提示し、利用者の「はい／いいえ」の判断を受けるまで公開しません。
