@@ -13,7 +13,7 @@ class Element {
 }
 function setup(data,fail=false){
   const nodes=Object.fromEntries(['filter','prefecture','search','count','events'].map(k=>[k,new Element()]));
-  const context=vm.createContext({document:{getElementById:k=>nodes[k],createElement:t=>new Element(t)},Intl,Date,Set,Error,Object,
+  const context=vm.createContext({document:{getElementById:k=>nodes[k],createElement:t=>new Element(t)},Intl,Date,Set,Error,Object,URL,
     fetch:async()=>{if(fail)throw Error('offline');return {ok:true,json:async()=>data};},location:{reload(){}}});
   vm.runInContext(script,context);
   return {nodes,context};
@@ -37,5 +37,26 @@ const base={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',cate
   const error=setup([],true);await new Promise(setImmediate);
   assert.match(error.nodes.events.children[0].textContent,/読み込めません/);
   assert.equal(error.nodes.events.children[1].tag,'button');
+  const pdfURL='https://example.org/guide.PDF?download=1#details';
+  const sourceURL='https://example.org/race';
+  const pdf=setup([{...base,title:'PDF要項の大会',official_url:pdfURL,source_url:sourceURL}]);await new Promise(setImmediate);
+  const pdfLinks=pdf.nodes.events.children[0].children.find(e=>e.className==='links').children;
+  assert.equal(pdfLinks.length,2);
+  assert.equal(pdfLinks[0].textContent,'掲載元のWebページ ↗');
+  assert.equal(pdfLinks[0].href,sourceURL);
+  assert.equal(pdfLinks[1].textContent,'大会要項（PDF）を見る ↗');
+  assert.equal(pdfLinks[1].href,pdfURL);
+  assert.equal(pdfLinks[0].rel,'noopener noreferrer');
+  for(const source of [undefined,pdfURL,'https://example.org/another.pdf','javascript:alert(1)','https://user:password@example.org/']){
+    const page=setup([{...base,title:'掲載元なしの大会',official_url:pdfURL,source_url:source}]);await new Promise(setImmediate);
+    const links=page.nodes.events.children[0].children.find(e=>e.className==='links').children;
+    assert.equal(links.length,1);
+    assert.equal(links[0].href,pdfURL);
+  }
+  const website=setup([{...base,title:'通常のWeb大会',source_url:sourceURL}]);await new Promise(setImmediate);
+  const webLinks=website.nodes.events.children[0].children.find(e=>e.className==='links').children;
+  assert.equal(webLinks.length,1);assert.equal(webLinks[0].textContent,'大会の公式情報を見る ↗');
+  const unsafe=setup([{...base,title:'不正URLの大会',official_url:'javascript:alert(1)',source_url:sourceURL}]);await new Promise(setImmediate);
+  assert.equal(unsafe.nodes.events.children[0].children.filter(e=>e.className==='links').length,0);
   console.log('Site checks passed: filtering, dates, pending/expired exclusion, text safety, empty/error states.');
 })().catch(e=>{console.error(e);process.exit(1);});
