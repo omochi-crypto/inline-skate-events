@@ -17,6 +17,23 @@
     "approved_at": "2026-10-28"
   },
   {
+    "id": "ba31bbdf47e2c239",
+    "title": "第6回東日本インラインホッケー競技大会",
+    "date_start": "2027-02-07",
+    "date_end": "2027-02-08",
+    "category": "hockey",
+    "prefecture": "埼玉県",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "venue": "埼玉県戸田市CCM Experience Center TOKYO",
+    "status": "approved",
+    "approved_by": "omochi-crypto",
+    "approval_comment_id": 6445687998,
+    "approval_issue": 8,
+    "approval_digest": "227114e32a431978",
+    "approved_at": "2026-10-28"
+  },
+  {
     "id": "b207d5f98709370f",
     "title": "第9回スプリント選手権大会",
     "date_start": "2027-03-07",
