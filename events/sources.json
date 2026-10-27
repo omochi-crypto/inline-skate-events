@@ -3,7 +3,8 @@
     {
       "id": "wsj-speed",
       "url": "https://worldskatejapan.or.jp/speed/speed_competition/",
-      "category": "speed"
+      "category": "speed",
+      "priority": "high"
     },
     {
       "id": "wsj-freestyle",
@@ -14,6 +15,24 @@
       "id": "wsj-calendar",
       "url": "https://worldskatejapan.or.jp/about/schedule/",
       "category": "multi"
+    },
+    {
+      "id": "wsj-marathon",
+      "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
+      "category": "speed",
+      "priority": "high"
+    },
+    {
+      "id": "wsj-track",
+      "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/track/",
+      "category": "speed",
+      "priority": "high"
+    },
+    {
+      "id": "wsj-road",
+      "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/road-circuit/",
+      "category": "speed",
+      "priority": "high"
     }
   ]
 }
