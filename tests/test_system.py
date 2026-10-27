@@ -114,6 +114,31 @@ class ApprovalTests(unittest.TestCase):
     def test_missing_prefecture_and_javascript_url_rejected(self):
         for extra in [{'prefecture':''},{'official_url':'javascript:alert(1)'},{'date_end':'2000-01-01'}]:
             with self.assertRaises(ValueError):validate({**self.event,**extra})
+
+    def test_linkless_flyer_needs_traceable_attachment_and_owner_approval(self):
+        event = {k:v for k,v in self.event.items() if k not in ('official_url','source_url')}
+        with self.assertRaises(ValueError):
+            validate(event)
+        flyer = {**event, 'source_type':'user_flyer', 'source_note':'利用者提供の大会チラシ', 'attachment_sha256':'a'*64,
+                 'start_time':'09:00', 'postponed_date':'2099-03-14',
+                 'registration_note':'当日受付', 'participation_fee':'小学生500円',
+                 'details':['300m・1,000m'], 'organizer':'主催：テスト連盟'}
+        self.assertEqual(validate(flyer), flyer)
+        for extra in [{'attachment_sha256':''}, {'source_note':''}, {'source_type':'unknown'},
+                      {'start_time':'25:00'}, {'postponed_date':'2000-01-01'}, {'details':['x'*401]}]:
+            with self.assertRaises(ValueError):
+                validate({**flyer,**extra})
+        issue = {**self.issue, 'body':candidate_body(flyer)}
+        payload = copy.deepcopy(self.payload)
+        payload['comment']['body'] = '/approve '+digest(flyer)
+        self.assertEqual(authorize(payload,issue),flyer)
+        changed = {**flyer, 'participation_fee':'変更'}
+        with self.assertRaises(ValueError):
+            authorize(payload,{**issue,'body':candidate_body(changed)})
+        payload['sender']['type']='Bot'
+        with self.assertRaises(ValueError):
+            authorize(payload,issue)
+
     def test_candidate_body_roundtrip_and_legacy(self):
         self.assertEqual(parse_body(candidate_body(self.event)),self.event)
         self.assertEqual(parse_body('未承認\n'+json.dumps(self.event)),self.event)

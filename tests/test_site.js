@@ -58,5 +58,16 @@ const base={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',cate
   assert.equal(webLinks.length,1);assert.equal(webLinks[0].textContent,'大会の公式情報を見る ↗');
   const unsafe=setup([{...base,title:'不正URLの大会',official_url:'javascript:alert(1)',source_url:sourceURL}]);await new Promise(setImmediate);
   assert.equal(unsafe.nodes.events.children[0].children.filter(e=>e.className==='links').length,0);
+  const flyer=setup([{...base,title:'チラシの大会',source_type:'user_flyer',
+    official_url:'https://example.org',source_url:'https://example.org/source',
+    start_time:'09:00',postponed_date:'2099-03-14',registration_note:'事前申込不要',
+    participation_fee:'小学生500円／中学生以上1,000円',details:['300m・1,000m・3,000m'],
+    organizer:'主催：テスト連盟',source_note:'提供チラシをもとに掲載'}]);await new Promise(setImmediate);
+  const flyerCard=flyer.nodes.events.children[0];
+  assert.equal(flyerCard.children.filter(e=>e.className==='links').length,0);
+  for(const text of ['開始：09:00','申込み：事前申込不要','参加費：小学生500円／中学生以上1,000円','提供チラシをもとに掲載'])
+    assert.ok(flyerCard.children.some(e=>e.textContent===text));
+  assert.ok(flyerCard.children.some(e=>e.textContent.startsWith('雨天延期：')));
+  assert.equal(flyerCard.children.find(e=>e.tag==='ul').children[0].textContent,'300m・1,000m・3,000m');
   console.log('Site checks passed: filtering, dates, pending/expired exclusion, text safety, empty/error states.');
 })().catch(e=>{console.error(e);process.exit(1);});
