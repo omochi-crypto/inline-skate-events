@@ -3,6 +3,12 @@ on:
   schedule:
     - cron: '25 1 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/collect_events.py'
+      - 'events/sources.json'
+      - '.github/workflows/collect-inline-events.yml'
 permissions:
   contents: read
   issues: write
@@ -14,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Compile-check collector
+        run: python -m py_compile scripts/collect_events.py
       - name: Collect candidates
         run: python scripts/collect_events.py
       - name: Create review issues for new candidates
