@@ -136,4 +136,26 @@ class ApprovalTests(unittest.TestCase):
             (root/'events/approved.json').write_text(json.dumps([{**self.event,'status':'approved'}]))
             with self.assertRaises(ValueError):build(root)
 
+
+class PageMarkupTests(unittest.TestCase):
+    def test_all_sport_options_exist_in_actual_html(self):
+        from html.parser import HTMLParser
+        class FilterOptions(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.in_filter = False
+                self.values = []
+            def handle_starttag(self, tag, attrs):
+                attrs = dict(attrs)
+                if tag == 'select':
+                    self.in_filter = attrs.get('id') == 'filter'
+                elif tag == 'option' and self.in_filter:
+                    self.values.append(attrs.get('value'))
+            def handle_endtag(self, tag):
+                if tag == 'select':
+                    self.in_filter = False
+        parser = FilterOptions()
+        parser.feed((Path(__file__).resolve().parents[1]/'site/index.html').read_text())
+        self.assertEqual(parser.values, ['', 'speed', 'marathon', 'freestyle', 'hockey', 'other', 'multi'])
+
 if __name__ == '__main__':unittest.main()
