@@ -13,6 +13,8 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 JST = ZoneInfo("Asia/Tokyo")
 DATE = re.compile(r"(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
+END_DAY = re.compile(r"(?:～|〜|~|－|-)\\s*(?:(\\d{1,2})\\s*月\\s*)?(\\d{1,2})\\s*日")
+SPEED = re.compile(r"マラソン|スピード|ロードレース|トラックレース|スプリント|SPD", re.I)
 INLINE = re.compile(r"インライン|ローラースケート|スピード|スラローム|スケートクロス|フリースタイル|ローラーフリースタイル|ホッケー|ダービー|ダウンヒル", re.I)
 EXCLUDE = re.compile(r"スケートボード|スクーター|リンクホッケー")
 class Parser(HTMLParser):
