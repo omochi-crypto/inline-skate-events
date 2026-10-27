@@ -28,6 +28,7 @@ jobs:
           existing=subprocess.run(['gh','issue','list','--state','all','--limit','1000','--json','title'],capture_output=True,text=True,check=True)
           titles={i['title'] for i in json.loads(existing.stdout)}
           count=0
+          candidates.sort(key=lambda e: (0 if e.get('category') == 'speed' else 1, e.get('date_start', '')))
           for event in candidates:
               title='[大会候補] '+event['id']+' '+event['date_start']
               if title in titles: continue
