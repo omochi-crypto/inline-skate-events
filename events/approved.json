@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "id": "0fbc2ee7e86996d7",
+    "title": "伊丹スピード記録会",
+    "date_start": "2026-12-13",
+    "date_end": "2026-12-13",
+    "category": "speed",
+    "prefecture": "兵庫県",
+    "official_url": "https://itami-roller.jp/pdf/kirokukai.pdf",
+    "source_url": "https://itami-roller.jp/kirokukai.html",
+    "venue": "伊丹市立ローラースケート場",
+    "status": "approved",
+    "approved_by": "omochi-crypto",
+    "approval_comment_id": 6445502051,
+    "approval_issue": 6,
+    "approval_digest": "dd1ca0e1e78fab2b",
+    "approved_at": "2026-10-28"
+  }
+]
