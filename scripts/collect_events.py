@@ -33,6 +33,58 @@ class Parser(HTMLParser):
         if self.skip: return
         value = " ".join(data.split())
         if value: self.lines.append((value, self.href))
+class TableRows(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.rows, self.row, self.cell, self.in_cell = [], None, None, False
+    def handle_starttag(self, tag, attrs):
+        if tag == "tr": self.row = []
+        elif tag in ("td", "th") and self.row is not None:
+            self.cell, self.in_cell = [], True
+    def handle_data(self, data):
+        if self.in_cell and self.cell is not None: self.cell.append(data)
+    def handle_endtag(self, tag):
+        if tag in ("td", "th") and self.in_cell:
+            self.row.append(" ".join("".join(self.cell).split()))
+            self.cell, self.in_cell = None, False
+        elif tag == "tr" and self.row is not None:
+            if self.row: self.rows.append(self.row)
+            self.row = None
+
+def schedule_events(html, source, today):
+    parser = TableRows()
+    parser.feed(html)
+    events = []
+    year = today.year
+    for cells in parser.rows:
+        if len(cells) < 2: continue
+        raw_date, title = cells[0], cells[1]
+        match = DATE.search(raw_date)
+        if match:
+            year = int(match.group(1))
+            month, day_num = int(match.group(2)), int(match.group(3))
+        else:
+            short = re.search(r"(\\d{1,2})\\s*月\\s*(\\d{1,2})\\s*日", raw_date)
+            if not short: continue
+            month, day_num = map(int, short.groups())
+        try: start = dt.date(year, month, day_num)
+        except ValueError: continue
+        if start < today: continue
+        code = cells[-1].upper().strip()
+        if code != "SPD" and not SPEED.search(title): continue
+        if EXCLUDE.search(title) or "フィギュア" in title: continue
+        end = start
+        range_match = END_DAY.search(raw_date)
+        if range_match:
+            try:
+                end = dt.date(year, int(range_match.group(1) or month), int(range_match.group(2)))
+                if end < start: end = start
+            except ValueError: pass
+        title = title.strip()[:180]
+        key = hashlib.sha256((source["id"]+"|"+str(start)+"|"+title).encode()).hexdigest()[:16]
+        events.append({"id":key,"title":title,"date_start":start.isoformat(),"date_end":end.isoformat(),"category":"speed","source_url":source["url"],"status":"pending","discovered_at":today.isoformat()})
+    return events
+
 def main():
     sources = json.loads((ROOT/"events/sources.json").read_text(encoding="utf-8"))["sources"]
     today = dt.datetime.now(JST).date()
@@ -43,6 +95,9 @@ def main():
             req = urllib.request.Request(source["url"], headers={"User-Agent":"InlineEventCollector/0.1 (public event index; polite daily fetch)"})
             with urllib.request.urlopen(req, timeout=25) as res:
                 html = res.read(2_000_000).decode("utf-8", "replace")
+            if source['id'] == 'wsj-calendar':
+                out.extend(schedule_events(html, source, today))
+                continue
             p = Parser()
             p.feed(html)
             # Conservative extraction: date must be present on the same text fragment.
