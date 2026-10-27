@@ -53,12 +53,27 @@ def main():
                 if day < today: continue
                 context = " ".join(x[0] for x in p.lines[max(0,idx-2):min(len(p.lines),idx+3)])
                 if not INLINE.search(context) or EXCLUDE.search(context): continue
+                # The federation calendar contains artistic and rink-hockey events;
+                # do not classify those as inline speed just because adjacent rows mention SPD.
+                if source["id"] == "wsj-calendar":
+                    if not SPEED.search(line) and not re.search(r"\\bSPD\\b", context): continue
+                    if re.search(r"フィギュア|リンクホッケー|ART|RHC", line): continue
                 title = re.sub(r"\s+", " ", context).strip()[:180]
                 if len(title) < 8: continue
+                end = day
+                suffix = line[match.end():]
+                range_match = END_DAY.search(suffix[:40])
+                if range_match:
+                    try:
+                        end = dt.date(day.year, int(range_match.group(1) or day.month), int(range_match.group(2)))
+                        if end < day: end = day
+                    except ValueError: end = day
                 key = hashlib.sha256((source["id"]+"|"+str(day)+"|"+title).encode()).hexdigest()[:16]
-                out.append({"id":key,"title":title,"date_start":day.isoformat(),"date_end":day.isoformat(),"category":source["category"],"source_url":source["url"],"status":"pending","discovered_at":today.isoformat()})
+                out.append({"id":key,"title":title,"date_start":day.isoformat(),"date_end":end.isoformat(),"category":source["category"],"source_url":source["url"],"status":"pending","discovered_at":today.isoformat()})
         except Exception as exc:
             errors.append({"source":source["id"],"error":str(exc)[:200]})
+    # Prefer speed/marathon review candidates in the daily issue quota.
+    out.sort(key=lambda e: (0 if e["category"] == "speed" else 1, e["date_start"]))
     unique = {e["id"]:e for e in out}
     path = ROOT/"events/candidates.json"
     existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
