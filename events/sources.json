@@ -1,0 +1,19 @@
+{
+  "sources": [
+    {
+      "id": "wsj-speed",
+      "url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+      "category": "speed"
+    },
+    {
+      "id": "wsj-freestyle",
+      "url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
+      "category": "freestyle"
+    },
+    {
+      "id": "wsj-calendar",
+      "url": "https://worldskatejapan.or.jp/about/schedule/",
+      "category": "multi"
+    }
+  ]
+}
