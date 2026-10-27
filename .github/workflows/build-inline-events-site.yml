@@ -1,4 +1,4 @@
-name: Build inline events static site
+name: Publish approved inline events site
 on:
   push:
     branches: [main]
@@ -9,17 +9,40 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: inline-events-pages
+  cancel-in-progress: true
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble public site artifact
+      - name: Validate approved event data
+        run: |
+          python - <<'PY'
+          import json,datetime
+          from pathlib import Path
+          data=json.loads(Path('events/approved.json').read_text(encoding='utf-8'))
+          assert isinstance(data,list),'Expected a JSON array'
+          for e in data:
+              assert e.get('status')=='approved'
+              assert e.get('title') and e.get('official_url','').startswith(('https://','http://'))
+              assert datetime.date.fromisoformat(e['date_start'])<=datetime.date.fromisoformat(e['date_end'])
+          print('Validated',len(data),'approved events')
+          PY
+      - name: Assemble site
         run: |
           mkdir -p public
           cp site/index.html public/index.html
           cp events/approved.json public/approved.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: inline-events-site
-          path: public/
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4
