@@ -24,6 +24,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Regression and approval safety tests
         run: python -m unittest discover -s tests -v
+      - name: Website behavior checks
+        run: node tests/test_site.js
       - name: Collect candidates from official and regional sources
         run: python scripts/collect_events.py
       - name: Create pending Issues and report all counts
@@ -33,7 +35,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: collection-report-${{ github.run_id }}
+          name: collection-report-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             events/candidates.json
             reports/

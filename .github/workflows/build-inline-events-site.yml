@@ -3,10 +3,7 @@ on:
   push:
     branches: [main]
     paths: ['events/approved.json', 'site/**', 'scripts/build_site.py', 'scripts/event_model.py', '.github/workflows/build-inline-events-site.yml']
-  workflow_run:
-    workflows: ['Approve reviewed inline event']
-    types: [completed]
-    branches: [main]
+  workflow_call:
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,9 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deploy:
-    if: >-
-      github.repository == 'omochi-crypto/inline-skate-events' &&
-      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
+    if: github.repository == 'omochi-crypto/inline-skate-events'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
@@ -33,7 +28,7 @@ jobs:
         run: python scripts/build_site.py
       - uses: actions/upload-artifact@v4
         with:
-          name: approved-site-preview
+          name: approved-site-preview-${{ github.run_id }}-${{ github.run_attempt }}
           path: public
       - uses: actions/configure-pages@v5
         with:
