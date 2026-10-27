@@ -56,6 +56,9 @@ jobs:
               if title in titles and replay:
                   print('Recreating closed candidate for verification:',title)
                   title=title+' [再収集テスト]'
+                  if title in titles:
+                      print('Already replayed:',title)
+                      continue
               body='**未承認・自動抽出情報。必ず公式情報と日付を確認してください。**\n\n'+json.dumps(event,ensure_ascii=False,indent=2)+'\n\n承認時は内容を精査し、events/approved.json に手動登録してください。Issueラベルだけでは公開されません。'
               subprocess.run(['gh','issue','create','--title',title,'--body',body],check=True)
               titles.add(title)
