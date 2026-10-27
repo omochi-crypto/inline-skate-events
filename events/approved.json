@@ -1,5 +1,35 @@
 [
   {
+    "id": "76330c9db9309815",
+    "title": "愛知県ローラースポーツ選手権",
+    "date_start": "2026-11-22",
+    "date_end": "2026-11-22",
+    "category": "speed",
+    "prefecture": "愛知県",
+    "venue": "江南市蘇南公園ローラースケート場",
+    "source_type": "user_flyer",
+    "source_note": "提供チラシをもとに掲載",
+    "attachment_sha256": "579fcdb6500cf984a31326b96d313f6e535bf14c3f578e4dadbdbf199a62536f",
+    "start_time": "09:00",
+    "postponed_date": "2026-11-29",
+    "registration_note": "事前申込不要。当日、現地受付で参加できます。",
+    "participation_fee": "小学生500円／中学生以上1,000円",
+    "details": [
+      "選手クラス：300m（タイムアタック）・1,000m・3,000m。",
+      "ビギナークラス：小学生以下の初心者。1人で滑れる小学6年生まで参加できます。300m・1,000mを実施。",
+      "「おっさんクラス」（チラシ表記）：300m・1,000m。",
+      "各クラス3位まで表彰（賞状・メダル）。",
+      "大会の最後に、みんなで参加するリレーを予定。"
+    ],
+    "organizer": "主催：愛知県ローラースポーツ連盟／主管：愛知県ローラースポーツ選手権大会実行委員会",
+    "status": "approved",
+    "approved_by": "omochi-crypto",
+    "approval_comment_id": 6456132259,
+    "approval_issue": 10,
+    "approval_digest": "747b30c93552c081",
+    "approved_at": "2026-10-28"
+  },
+  {
     "id": "0fbc2ee7e86996d7",
     "title": "伊丹スピード記録会",
     "date_start": "2026-12-13",
