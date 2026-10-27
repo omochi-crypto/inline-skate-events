@@ -1,0 +1,41 @@
+name: Approve reviewed inline event
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Reviewed candidate Issue number (edit Issue JSON to add official_url and correct fields first)'
+        required: true
+        type: number
+permissions:
+  contents: write
+  issues: read
+concurrency:
+  group: inline-event-approvals
+  cancel-in-progress: false
+jobs:
+  approve:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Read reviewed Issue and validate event
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+        run: |
+          gh issue view "$ISSUE_NUMBER" --json body,state,author > /tmp/review-issue.json
+          python scripts/approve_event.py /tmp/review-issue.json
+      - name: Commit approved event
+        run: |
+          if git diff --quiet -- events/approved.json; then
+            echo 'No change; event was already approved'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add events/approved.json
+          git commit -m "Approve reviewed inline skating event"
+          git push
