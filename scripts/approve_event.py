@@ -11,7 +11,7 @@ root = Path(__file__).resolve().parents[1]
 issue = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
 assert issue.get("state") == "OPEN", "Issue must be open"
 body = issue.get("body") or ""
-match = re.search(r"\\{", body)
+match = re.search(r"\{", body)
 assert match, "Issue body must contain an event JSON object"
 event, _ = json.JSONDecoder().raw_decode(body[match.start():])
 assert isinstance(event, dict), "Event must be an object"
