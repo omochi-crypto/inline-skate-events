@@ -15,5 +15,22 @@
     "approval_issue": 6,
     "approval_digest": "dd1ca0e1e78fab2b",
     "approved_at": "2026-10-28"
+  },
+  {
+    "id": "b207d5f98709370f",
+    "title": "第9回スプリント選手権大会",
+    "date_start": "2027-03-07",
+    "date_end": "2027-03-07",
+    "category": "speed",
+    "prefecture": "東京都",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "venue": "東京都江戸川区水辺のスポーツガーデン",
+    "status": "approved",
+    "approved_by": "omochi-crypto",
+    "approval_comment_id": 6445658017,
+    "approval_issue": 7,
+    "approval_digest": "58d62b86db2a8e16",
+    "approved_at": "2026-10-28"
   }
 ]
