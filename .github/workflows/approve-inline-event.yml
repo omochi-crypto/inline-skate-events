@@ -1,41 +1,58 @@
 name: Approve reviewed inline event
 on:
+  issue_comment:
+    types: [created]
   workflow_dispatch:
     inputs:
       issue_number:
-        description: 'Reviewed candidate Issue number (edit Issue JSON to add official_url and correct fields first)'
+        description: 'Candidate Issue number (validation only; never publishes)'
         required: true
         type: number
 permissions:
   contents: write
-  issues: read
+  issues: write
 concurrency:
   group: inline-event-approvals
   cancel-in-progress: false
 jobs:
   approve:
-    if: github.actor == github.repository_owner
+    if: >-
+      github.repository == 'omochi-crypto/inline-skate-events' &&
+      (github.event_name == 'workflow_dispatch' ||
+      (github.event.sender.login == github.repository_owner &&
+       github.event.sender.type == 'User' && !github.event.issue.pull_request &&
+       (startsWith(github.event.comment.body, '/approve ') || github.event.comment.body == '/preview')))
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: true
-      - name: Read reviewed Issue and validate event
+          ref: main
+      - name: Check current Issue and require explicit human approval
+        id: approval
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
+        run: python scripts/approve_event.py
+      - name: Commit approved event with audit trail
+        if: steps.approval.outputs.changed == 'true'
         run: |
-          gh issue view "$ISSUE_NUMBER" --json body,state,author > /tmp/review-issue.json
-          python scripts/approve_event.py /tmp/review-issue.json
-      - name: Commit approved event
-        run: |
-          if git diff --quiet -- events/approved.json; then
-            echo 'No change; event was already approved'
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add events/approved.json
-          git commit -m "Approve reviewed inline skating event"
-          git push
+          git commit -m "Publish event explicitly approved by repository owner"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Record approval result without removing Issue history
+        if: steps.approval.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          python - <<'PY'
+          import os,sys
+          sys.path.insert(0,'scripts')
+          from github_api import api
+          api('/issues/'+os.environ['ISSUE_NUMBER']+'/comments','POST',{'body':'人間による承認を記録しました。Webサイトの公開処理を開始します。ActionsのPublish approved inline events siteで反映結果を確認できます。'})
+          PY

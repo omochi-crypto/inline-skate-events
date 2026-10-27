@@ -1,1 +1,522 @@
-[]
+[
+  {
+    "id": "8cbc8bdbe3c96ed7",
+    "title": "2025スケートクロスジャパンオープン",
+    "date_start": "2025-04-12",
+    "date_end": "2025-04-13",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "さいたま市大門上池",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2025skatecross",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "2025スケートクロスジャパンオープン Skate Cross 2025年 4月 12日 ~ 4月 13日 さいたま市大門上池",
+    "source_ids": [
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "ee487f25c065df5e",
+    "title": "JAPANインラインスピードチャレンジカップ(トラック)",
+    "date_start": "2025-04-19",
+    "date_end": "2025-04-19",
+    "category": "speed",
+    "prefecture": "奈良県",
+    "venue": "奈良県川西町 保田遊水地リンク(仮称)",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_japanchallenge2025/",
+    "source_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/track/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "JAPANインラインスピードチャレンジカップ(トラック) Track 2025年 4月 19日 奈良県川西町 保田遊水地リンク(仮称)",
+    "source_ids": [
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "ffe44caa76d3fcf9",
+    "title": "第 70 回全日本トラックレーススピード選手権大会開催 兼 スピード世界選手権大会/中国(トラック競技選考会) 兼 アジアローラースケート選手権大会(韓国)(スピード・トラック競技選考会)",
+    "date_start": "2025-04-19",
+    "date_end": "2025-04-20",
+    "category": "speed",
+    "prefecture": "奈良県",
+    "venue": "奈良県川西町 保田遊水地リンク(仮称)",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/20250419/",
+    "source_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/track/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第 70 回全日本トラックレーススピード選手権大会開催 兼 スピード世界選手権大会/中国(トラック競技選考会) 兼 アジアローラースケート選手権大会(韓国)(スピード・トラック競技選考会) Track 2025年 4月 19日 ~ 4月 20日 奈良県川西町 保田遊水地リンク(仮称)",
+    "source_ids": [
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "7ed229dca4876c5b",
+    "title": "JAPANインラインスピードチャレンジカップ(ロード)",
+    "date_start": "2025-05-17",
+    "date_end": "2025-05-17",
+    "category": "speed",
+    "prefecture": "岐阜県",
+    "venue": "岐阜県クリスタルパーク恵那スケート場",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2025japan-inline-speed-challenge-cup_info/",
+    "source_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/road-circuit/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "JAPANインラインスピードチャレンジカップ(ロード) Road Circuit 2025年 5月 17日 岐阜県クリスタルパーク恵那スケート場",
+    "source_ids": [
+      "wsj-road"
+    ]
+  },
+  {
+    "id": "5c04df2117f2630e",
+    "title": "第 21回全日本ロードレーススピード選手権大会 兼 世界選手権・アジア選手権大会日本代表選考会",
+    "date_start": "2025-05-17",
+    "date_end": "2025-05-18",
+    "category": "speed",
+    "prefecture": "岐阜県",
+    "venue": "岐阜県クリスタルパーク恵那スケート場",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2025alljapanroadchampionship%E3%80%80/",
+    "source_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/road-circuit/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第 21回全日本ロードレーススピード選手権大会 兼 世界選手権・アジア選手権大会日本代表選考会 Road Circuit 2025年 5月 17日 ~ 5月 18日 岐阜県クリスタルパーク恵那スケート場",
+    "source_ids": [
+      "wsj-road"
+    ]
+  },
+  {
+    "id": "9d5c9327ab8d6bdf",
+    "title": "第66回東日本ローラースケートスピード選手権大会 兼 東日本ローラースケートスピード大会2025(一般/小学生)",
+    "date_start": "2025-11-02",
+    "date_end": "2025-11-02",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "水辺のガーデンローラースポーツコート",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2025eastjapan%E3%80%80/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第66回東日本ローラースケートスピード選手権大会 兼 東日本ローラースケートスピード大会2025(一般/小学生) Track 2025年 11月 2日 ~ 11月 2日 水辺のガーデンローラースポーツコート",
+    "source_ids": [
+      "wsj-speed",
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "4be16c5865b7b9e0",
+    "title": "第50回西日本ローラースケートスピード選手権大会 兼 西日本ローラースケートスピード大会2025(一般/小学生)",
+    "date_start": "2025-11-16",
+    "date_end": "2025-11-16",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "オーバルパークかわにし",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2025westjapan%E3%80%80/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第50回西日本ローラースケートスピード選手権大会 兼 西日本ローラースケートスピード大会2025(一般/小学生) Track 2025年 11月 16日 ~ 11月 16日 オーバルパークかわにし",
+    "source_ids": [
+      "wsj-speed",
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "2d8b502c763bcb5e",
+    "title": "JAPANインラインスピードチャレンジカップ(トラック)",
+    "date_start": "2026-04-04",
+    "date_end": "2026-04-04",
+    "category": "speed",
+    "prefecture": "奈良県",
+    "venue": "奈良県川西町 オーバルパークかわにし",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_japanchallenge2026/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "JAPANインラインスピードチャレンジカップ(トラック) Track 2026年 4月 4日 奈良県川西町 オーバルパークかわにし",
+    "source_ids": [
+      "wsj-speed",
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "83d06fdc0dc8c271",
+    "title": "第 71 回全日本トラックレーススピード選手権大会開催 兼 WorldSkateGames2026(パラグアイ)トラック競技選考会",
+    "date_start": "2026-04-04",
+    "date_end": "2026-04-05",
+    "category": "speed",
+    "prefecture": "奈良県",
+    "venue": "奈良県川西町 オーバルパークかわにし",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/20260404/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第 71 回全日本トラックレーススピード選手権大会開催 兼 WorldSkateGames2026(パラグアイ)トラック競技選考会 Track 2026年 4月 4日 ~ 4月 5日 奈良県川西町 オーバルパークかわにし",
+    "source_ids": [
+      "wsj-speed",
+      "wsj-track"
+    ]
+  },
+  {
+    "id": "9ab7c6a6cd0f62ec",
+    "title": "第71回全日本トラックレーススピード選手権大会",
+    "date_start": "2026-04-04",
+    "date_end": "2026-04-05",
+    "category": "speed",
+    "prefecture": "奈良県",
+    "venue": "奈良県川西町オーパルパークかわにし",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "4月4日~5日 | 第71回全日本トラックレーススピード選手権大会 | 奈良県川西町オーパルパークかわにし | 主催 | SPD",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "59e8f9468fb79f08",
+    "title": "アルペン・スケートクロス ジャパンオープン2026",
+    "date_start": "2026-04-19",
+    "date_end": "2026-04-19",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "さいたま市大門上池調整池底面広場",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_skatecross2026/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "アルペン・スケートクロス ジャパンオープン2026 Skate Cross 2026年 4月 19日 さいたま市大門上池調整池底面広場",
+    "source_ids": [
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "a9bc2941e7efb34a",
+    "title": "第 22回全日本ロードレーススピード選手権大会 兼 世界選手権大会日本代表選考会",
+    "date_start": "2026-06-06",
+    "date_end": "2026-06-07",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "わたらせサイクルパーク",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2026alljapanroadchampionship%E3%80%80/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第 22回全日本ロードレーススピード選手権大会 兼 世界選手権大会日本代表選考会 Road Circuit 2026年 6月 6日 ~ 6月 7日 わたらせサイクルパーク",
+    "source_ids": [
+      "wsj-road",
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "1c94e183d229f5bd",
+    "title": "JAPANインラインスピードチャレンジカップ(ロード)",
+    "date_start": "2026-06-06",
+    "date_end": "2026-06-06",
+    "category": "speed",
+    "prefecture": "",
+    "venue": "わたらせサイクルパーク",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/2026japan-inline-speed-challenge-cup_info/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "JAPANインラインスピードチャレンジカップ(ロード) Road Circuit 2026年 6月 6日 わたらせサイクルパーク",
+    "source_ids": [
+      "wsj-road",
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "f8ebec8e2fdaea97",
+    "title": "第22回全日本ロードレース選手権大会",
+    "date_start": "2026-06-06",
+    "date_end": "2026-06-07",
+    "category": "speed",
+    "prefecture": "栃木県",
+    "venue": "栃木県 わたらせサイクルパーク",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "6月6日~7日 | 第22回全日本ロードレース選手権大会 | 栃木県 わたらせサイクルパーク | 主催 | SPD",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "0fbc2ee7e86996d7",
+    "title": "伊丹スピード記録会",
+    "date_start": "2026-12-13",
+    "date_end": "2026-12-13",
+    "category": "speed",
+    "prefecture": "兵庫県",
+    "venue": "伊丹市立ローラースケート場",
+    "official_url": "https://itami-roller.jp/pdf/kirokukai.pdf",
+    "source_url": "https://itami-roller.jp/kirokukai.html",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "日時 2026年12月13日(日) 午前8時30分~受付、9時30分開会式 \n   ※オ",
+    "source_ids": [
+      "itami-association"
+    ]
+  },
+  {
+    "id": "b207d5f98709370f",
+    "title": "第9回スプリント選手権大会",
+    "date_start": "2027-03-07",
+    "date_end": "2027-03-07",
+    "category": "speed",
+    "prefecture": "東京都",
+    "venue": "東京都江戸川区水辺のスポーツガーデン",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "2027年3月7日 | 第9回スプリント選手権大会 | 東京都江戸川区水辺のスポーツガーデン | 主催 | SPD",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "f65a9f3953242742",
+    "title": "第29回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2024/12",
+    "date_start": "2024-12-22",
+    "date_end": "2024-12-22",
+    "category": "marathon",
+    "prefecture": "",
+    "venue": "平田リバーサイドプラザ(1周3.35km)",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/the-29th-national-roller-skate-marathon/",
+    "source_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第29回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2024/12 Marathon 2024年 12月 22日 平田リバーサイドプラザ(1周3.35km)",
+    "source_ids": [
+      "wsj-marathon"
+    ]
+  },
+  {
+    "id": "15b452ad2d232f42",
+    "title": "ウルトラスケート長良川2025",
+    "date_start": "2025-10-12",
+    "date_end": "2025-10-12",
+    "category": "marathon",
+    "prefecture": "岐阜県",
+    "venue": "海津市長良川リバーサイドプラザ",
+    "official_url": "http://www.inlineskate.or.jp/241103ultra.htm",
+    "source_url": "https://giaskating.jugem.jp/?eid=314",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "0 岐阜県インラインスケート協会事務局の内記です いつもお世話になります 大変遅くなりましたがウルトラスケート大会の日程をお知らせいたします なお、国際大会との関連により大会を1か月早めております 11月開催でのご予定されていた皆様にはお詫びいたします なお、競技内容等は変更となる場合がありますのでよろしくお願いいたします ◎ ウルトラスケート長良川2025 2025年10月12日(日)会場 岐阜県海津市 平田リバーサイドプラザ http://www.kk-giken.jp/hiratariver/ 42.195k、50k、100k、150k、200K (参考:昨年の大会要項) http://www.inlineskate.or.jp/241103ultra.htm 申し込み開始まで今しばらくお待ちください 全国のインラインスケーターの参加をお待ちしています #gia #ウルトラスケート #スピード選手権 Tweet",
+    "source_ids": [
+      "gifu-association"
+    ],
+    "date_note": "記事の投稿年を開催年の文脈として使用。承認前に公式要項を照合してください。"
+  },
+  {
+    "id": "1117c8b2bd9b01db",
+    "title": "第30回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2025",
+    "date_start": "2025-12-07",
+    "date_end": "2025-12-07",
+    "category": "marathon",
+    "prefecture": "",
+    "venue": "わたらせサイクルパーク(1周1.5km)",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_competition/the-30th-national-roller-skate-marathon/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第30回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2025 Marathon 2025年 12月 7日 わたらせサイクルパーク(1周1.5km)",
+    "source_ids": [
+      "wsj-marathon",
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "63eb71cfbc2b4b02",
+    "title": "ウルトラスケート長良川2026",
+    "date_start": "2026-10-11",
+    "date_end": "2026-10-11",
+    "category": "marathon",
+    "prefecture": "岐阜県",
+    "venue": "海津市長良川リバーサイドプラザ",
+    "official_url": "http://www.inlineskate.or.jp/261011ultra.htm",
+    "source_url": "https://giaskating.jugem.jp/?eid=319",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "0 ウルトラスケーターの皆さんに朗報です! 岐阜県インラインスケート協会事務局の内記です ウルトラスケート長良川の会場 「海津市長良川リバーサイドプラザ」1周4.3kmの周回コース そのうち第3コーナーから第4コーナーにかけては、ガタガタで200キロを滑る選手には一周ごとに訪れる修行となっていました。(逆にそれがウルトラスケートでもありましたが💦) 以前より、海津市はじめ関係機関に舗装の要望をしてきたところですが、いよいよ今夏「舗装工事」が行われることとなり、 工事が始まりました。 これで、全コース快適なアスファルト舗装コースとなります。 つきましては、これまでこの「ガタガタ」を理由にエントリーをためらっていたスケーターの皆さん 新しくなった新コースでウルトラスケートを楽しみませんか! エントリーは令和8年9月13日(日)までとなっています 10月11日は岐阜・海津市でお会いしましょう!!️ エントリーはこちら http://www.inlineskate.or.jp/261011ultra.htm コースの概要 https://youtu.be/NSV5Ql4bU6U?si=fCVg_cirfyRdGcvf 9分15秒からが、今回舗装される場所になります 会場はこちら https://nagaragawa-riverside.jp/ クラス ☆ 200Kmウルトラ(4.3キロコースを約47周) 制限時間 12時間00分(時間内完走平均時速約17キロ) ☆ 150Kmウルトラ(4.3キロコースを約35周) 制限時間 12時間00分(時間内完走平均時速約13キロ) ☆ 100Kmチャレンジ(4.3キロコースを23周) 制限時間 8時間30分(時間内完走平均時速約12キロ) ☆ 50Kmインラインウオーキング(4.3キロコースを約11周) 制限時間 8時間30分(時間内完走平均時速約6キロ) ☆ 42.195Kmインラインウオーキング(4.3キロコースを約10周) 制限時間 8時間30分(時間内完走平均時速約5キロ) #ウルトラスケート #インラインスケート Tweet",
+    "source_ids": [
+      "gifu-association"
+    ],
+    "date_note": "記事の投稿年を開催年の文脈として使用。承認前に公式要項を照合してください。"
+  },
+  {
+    "id": "754ceaaa4fa3b543",
+    "title": "第31回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2026",
+    "date_start": "2026-10-25",
+    "date_end": "2026-10-25",
+    "category": "marathon",
+    "prefecture": "",
+    "venue": "長良川リバーサイドプラザ(1周3.35km)",
+    "official_url": "https://worldskatejapan.or.jp/speed/speed_comspeed/speed_competition/the-31th-marathon_202026/petition/the-30th-national-roller-skate-marathon/",
+    "source_url": "https://worldskatejapan.or.jp/speed/speed_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第31回全国ローラースケートマラソン 兼:全国ローラースケートロードレース大会2026 Marathon 2026年 10月 25日 長良川リバーサイドプラザ(1周3.35km)",
+    "source_ids": [
+      "wsj-marathon",
+      "wsj-speed"
+    ]
+  },
+  {
+    "id": "a9723a8d232b3375",
+    "title": "第14回全日本インラインフリースタイル選手権大会",
+    "date_start": "2025-06-21",
+    "date_end": "2025-06-22",
+    "category": "freestyle",
+    "prefecture": "",
+    "venue": "さいたま市浦和駒場体育館",
+    "official_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/14th/",
+    "source_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第14回全日本インラインフリースタイル選手権大会 Inline Freestyle 2025年 6月 21日 ~ 6月 22日 さいたま市浦和駒場体育館",
+    "source_ids": [
+      "wsj-freestyle"
+    ]
+  },
+  {
+    "id": "71122edab65705b8",
+    "title": "ROLLER FREESTYLE World Championships 2025 JAPAN STREET 日本代表選考会",
+    "date_start": "2025-08-30",
+    "date_end": "2025-08-30",
+    "category": "freestyle",
+    "prefecture": "",
+    "venue": "境町アーバンスポーツパーク",
+    "official_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/world-championships-2025-japan-street/",
+    "source_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "ROLLER FREESTYLE World Championships 2025 JAPAN STREET 日本代表選考会 Street 2025年 8月 30日 境町アーバンスポーツパーク",
+    "source_ids": [
+      "wsj-freestyle"
+    ]
+  },
+  {
+    "id": "e126da42724a3e30",
+    "title": "ROLLER FREESTYLE World Championships 2025 JAPAN PARK 日本代表選考会",
+    "date_start": "2025-08-31",
+    "date_end": "2025-08-31",
+    "category": "freestyle",
+    "prefecture": "",
+    "venue": "境町アーバンスポーツパーク",
+    "official_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/world-championships-2025-japan-park/",
+    "source_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "ROLLER FREESTYLE World Championships 2025 JAPAN PARK 日本代表選考会 Park 2025年 8月 31日 境町アーバンスポーツパーク",
+    "source_ids": [
+      "wsj-freestyle"
+    ]
+  },
+  {
+    "id": "09bbfe8f0b1c4826",
+    "title": "第5回インラインホッケー全日本選手権大会",
+    "date_start": "2026-05-02",
+    "date_end": "2026-05-05",
+    "category": "hockey",
+    "prefecture": "北海道",
+    "venue": "北海道帯広市帯広の森スポーツセンター",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "5月2日~5日 | 第5回インラインホッケー全日本選手権大会 | 北海道帯広市帯広の森スポーツセンター | 主催 | IHC",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "e0df1d5fc74b4a50",
+    "title": "第15回全日本インラインフリースタイル選手権大会 supported by nansin",
+    "date_start": "2026-05-23",
+    "date_end": "2026-05-24",
+    "category": "freestyle",
+    "prefecture": "",
+    "venue": "さいたま市浦和駒場体育館",
+    "official_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/15th/",
+    "source_url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "第15回全日本インラインフリースタイル選手権大会 supported by nansin Inline Freestyle 2026年 5月 23日 ~ 5月 24日 さいたま市浦和駒場体育館",
+    "source_ids": [
+      "wsj-freestyle"
+    ]
+  },
+  {
+    "id": "1ec047bfffba04dc",
+    "title": "第15回全日本インラインフリースタイル選手権大会",
+    "date_start": "2026-05-23",
+    "date_end": "2026-05-24",
+    "category": "freestyle",
+    "prefecture": "埼玉県",
+    "venue": "埼玉県さいたま市浦和駒場体育館",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "5月23日~24日 | 第15回全日本インラインフリースタイル選手権大会 | 埼玉県さいたま市浦和駒場体育館 | 主催 | IFS",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "74212b0b40d1c05c",
+    "title": "全日本ダービー選手権大会兼日本代表選手選考大会",
+    "date_start": "2026-06-07",
+    "date_end": "2026-06-07",
+    "category": "other",
+    "prefecture": "",
+    "venue": "東京ドームスケートアリーナ",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "6月7日 | 全日本ダービー選手権大会兼日本代表選手選考大会 | 東京ドームスケートアリーナ | 主催 | RDB",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "9b084dbc9ea0f62e",
+    "title": "第1回西日本インラインホッケー競技大会",
+    "date_start": "2026-08-01",
+    "date_end": "2026-08-01",
+    "category": "hockey",
+    "prefecture": "兵庫県",
+    "venue": "兵庫県・丹波市ビュアスポーツ柏原",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "8月1日 | 第1回西日本インラインホッケー競技大会 | 兵庫県・丹波市ビュアスポーツ柏原 | 主催 | IHC",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  },
+  {
+    "id": "ba31bbdf47e2c239",
+    "title": "第6回東日本インラインホッケー競技大会",
+    "date_start": "2027-02-07",
+    "date_end": "2027-02-08",
+    "category": "hockey",
+    "prefecture": "埼玉県",
+    "venue": "埼玉県戸田市CCM Experience Center TOKYO",
+    "official_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "source_url": "https://worldskatejapan.or.jp/about/schedule/",
+    "status": "pending",
+    "discovered_at": "2026-10-27",
+    "evidence": "2027年2月7日~8日 | 第6回東日本インラインホッケー競技大会 | 埼玉県戸田市CCM Experience Center TOKYO | 主催 | IHC",
+    "source_ids": [
+      "wsj-calendar"
+    ]
+  }
+]

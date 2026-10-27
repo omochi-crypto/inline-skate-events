@@ -2,10 +2,11 @@ name: Publish approved inline events site
 on:
   push:
     branches: [main]
-    paths:
-      - 'events/approved.json'
-      - 'site/**'
-      - '.github/workflows/build-inline-events-site.yml'
+    paths: ['events/approved.json', 'site/**', 'scripts/build_site.py', 'scripts/event_model.py', '.github/workflows/build-inline-events-site.yml']
+  workflow_run:
+    workflows: ['Approve reviewed inline event']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,34 +14,30 @@ permissions:
   id-token: write
 concurrency:
   group: inline-events-pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
+    if: >-
+      github.repository == 'omochi-crypto/inline-skate-events' &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Validate approved event data
-        run: |
-          python - <<'PY'
-          import json,datetime
-          from pathlib import Path
-          data=json.loads(Path('events/approved.json').read_text(encoding='utf-8'))
-          assert isinstance(data,list),'Expected a JSON array'
-          for e in data:
-              assert e.get('status')=='approved'
-              assert e.get('title') and e.get('official_url','').startswith(('https://','http://'))
-              assert datetime.date.fromisoformat(e['date_start'])<=datetime.date.fromisoformat(e['date_end'])
-          print('Validated',len(data),'approved events')
-          PY
-      - name: Assemble site
-        run: |
-          mkdir -p public
-          cp site/index.html public/index.html
-          cp events/approved.json public/approved.json
+        with:
+          ref: main
+      - name: Validate approval audit and build public site
+        run: python scripts/build_site.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: approved-site-preview
+          path: public
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

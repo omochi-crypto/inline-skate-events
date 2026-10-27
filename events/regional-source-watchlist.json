@@ -1,26 +1,47 @@
 {
-  "priority": "speed_marathon",
-  "organizer_watchlist": [
+  "checked_at": "2026-10-27",
+  "sources": [
     {
-      "name": "岐阜県インラインスケート協会（ウルトラスケート長良川）",
-      "event": "ウルトラスケート長良川",
-      "evidence_url": "https://www.ascschool.com/event.html",
-      "status": "organizer_url_needs_verification",
-      "note": "参加団体の開催報告。主催者の公式募集ページを特定してから自動収集に追加する"
+      "name": "岐阜県インラインスケート協会",
+      "url": "https://giaskating.jugem.jp/",
+      "status": "active",
+      "note": "協会ブログを追加。投稿日時と大会開催日を分離。年補完の注記あり"
     },
     {
-      "name": "東京都ローラースポーツ連盟（地域競技会）",
-      "event": "東京都インラインスケート大会",
-      "evidence_url": "https://nishitokyo-parks.jp/events/1019",
-      "status": "official_event_page_verified",
-      "note": "2026年開催済み。翌年の告知URLが変わる可能性があるため定期的に収集元を確認する"
+      "name": "旧岐阜県協会HP",
+      "url": "http://gifu-inline.com/",
+      "status": "excluded",
+      "note": "現在は無関係な医療口コミページに転送されるため、協会ブログの旧リンクを収集元として採用しない"
     },
     {
-      "name": "ワールドスケートジャパン（全国ローラースケートマラソン）",
-      "event": "全国ローラースケートマラソン",
-      "evidence_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
-      "status": "automatic_source_added",
-      "note": "公式カテゴリー一覧は既に自動収集対象"
+      "name": "ウルトラスケート募集ページ",
+      "url": "https://www.inlineskate.or.jp/261011ultra.htm",
+      "status": "unavailable",
+      "note": "検証時503。協会ブログから大会候補を抽出し、公式募集リンクは承認時に人が確認する"
+    },
+    {
+      "name": "東京都ローラースポーツ連盟",
+      "url": "https://www.trsf.jp/",
+      "status": "unavailable",
+      "note": "検証時503。旧専門委員会ブログは2012年で更新停止。現行告知を継続調査する"
+    },
+    {
+      "name": "西東京市立公園",
+      "url": "https://nishitokyo-parks.jp/events/1019",
+      "status": "unavailable",
+      "note": "検証環境から403。回避処理は行わない。地方連盟または主催者の現行告知に切り替える"
+    },
+    {
+      "name": "伊丹市立ローラースケート場",
+      "url": "https://itami-roller.jp/kirokukai.html",
+      "status": "active",
+      "note": "公式要項PDFの年付き開催日を読み取る"
+    },
+    {
+      "name": "淀川スケートクラブ",
+      "url": "https://inlineskate-yodogawa.blog.jp/",
+      "status": "active_limited",
+      "note": "記事単位に分離。日付が画像や省略表記のみの場合は警告として残す。練習会は大会扱いしない"
     }
   ]
 }

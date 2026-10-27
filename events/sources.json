@@ -4,35 +4,66 @@
       "id": "wsj-speed",
       "url": "https://worldskatejapan.or.jp/speed/speed_competition/",
       "category": "speed",
-      "priority": "high"
+      "priority": "high",
+      "adapter": "cards"
     },
     {
       "id": "wsj-freestyle",
       "url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
-      "category": "freestyle"
+      "category": "freestyle",
+      "adapter": "cards"
     },
     {
       "id": "wsj-calendar",
       "url": "https://worldskatejapan.or.jp/about/schedule/",
-      "category": "multi"
+      "category": "multi",
+      "adapter": "calendar"
     },
     {
       "id": "wsj-marathon",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
-      "category": "speed",
-      "priority": "high"
+      "category": "marathon",
+      "priority": "high",
+      "adapter": "cards"
     },
     {
       "id": "wsj-track",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/track/",
       "category": "speed",
-      "priority": "high"
+      "priority": "high",
+      "adapter": "cards"
     },
     {
       "id": "wsj-road",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/road-circuit/",
       "category": "speed",
+      "priority": "high",
+      "adapter": "cards"
+    },
+    {
+      "id": "gifu-association",
+      "url": "https://giaskating.jugem.jp/",
+      "category": "speed",
+      "adapter": "gia",
+      "prefecture": "岐阜県",
       "priority": "high"
+    },
+    {
+      "id": "yodogawa-club",
+      "url": "https://inlineskate-yodogawa.blog.jp/",
+      "category": "speed",
+      "adapter": "articles",
+      "selector": ".article-inner",
+      "priority": "regional"
+    },
+    {
+      "id": "itami-association",
+      "url": "https://itami-roller.jp/kirokukai.html",
+      "category": "speed",
+      "prefecture": "兵庫県",
+      "adapter": "pdf_page",
+      "selector": "body",
+      "priority": "regional"
     }
   ]
 }
