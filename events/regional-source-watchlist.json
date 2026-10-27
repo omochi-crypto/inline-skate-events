@@ -1,0 +1,26 @@
+{
+  "priority": "speed_marathon",
+  "organizer_watchlist": [
+    {
+      "name": "岐阜県インラインスケート協会（ウルトラスケート長良川）",
+      "event": "ウルトラスケート長良川",
+      "evidence_url": "https://www.ascschool.com/event.html",
+      "status": "organizer_url_needs_verification",
+      "note": "参加団体の開催報告。主催者の公式募集ページを特定してから自動収集に追加する"
+    },
+    {
+      "name": "東京都ローラースポーツ連盟（地域競技会）",
+      "event": "東京都インラインスケート大会",
+      "evidence_url": "https://nishitokyo-parks.jp/events/1019",
+      "status": "official_event_page_verified",
+      "note": "2026年開催済み。翌年の告知URLが変わる可能性があるため定期的に収集元を確認する"
+    },
+    {
+      "name": "ワールドスケートジャパン（全国ローラースケートマラソン）",
+      "event": "全国ローラースケートマラソン",
+      "evidence_url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
+      "status": "automatic_source_added",
+      "note": "公式カテゴリー一覧は既に自動収集対象"
+    }
+  ]
+}
