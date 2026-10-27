@@ -35,11 +35,15 @@ jobs:
           candidates=json.loads(Path('events/candidates.json').read_text())
           existing=subprocess.run(['gh','issue','list','--state','all','--limit','1000','--json','title'],capture_output=True,text=True,check=True)
           titles={i['title'] for i in json.loads(existing.stdout)}
+          print('Candidate records:',len(candidates))
+          print('Previously registered titles (including closed):',len(titles))
           count=0
           candidates.sort(key=lambda e: (0 if e.get('category') == 'speed' else 1, e.get('date_start', '')))
           for event in candidates:
               title='[大会候補] '+event['id']+' '+event['date_start']
-              if title in titles: continue
+              if title in titles:
+                  print('Skip previously reviewed candidate:',title)
+                  continue
               body='**未承認・自動抽出情報。必ず公式情報と日付を確認してください。**\n\n'+json.dumps(event,ensure_ascii=False,indent=2)+'\n\n承認時は内容を精査し、events/approved.json に手動登録してください。Issueラベルだけでは公開されません。'
               subprocess.run(['gh','issue','create','--title',title,'--body',body],check=True)
               count+=1
