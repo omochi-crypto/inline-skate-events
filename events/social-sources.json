@@ -53,7 +53,16 @@
     "site:instagram.com japaninlineskateassociation 大会",
     "site:x.com インラインスケート 大会 募集 -アイス -フィギュアスケート",
     "site:x.com インラインスピード 選手権",
-    "インライン マラソン 大会 主催 Facebook Instagram"
+    "インライン マラソン 大会 主催 Facebook Instagram",
+    "インラインスピード 記録会 参加者募集 2026 2027 -アイス",
+    "インラインスケート スピード 大会 要項 申込 2027 -氷上",
+    "ローラースケート スピード 大会 クラブ ブログ 2027",
+    "インライン マラソン ウルトラスケート 参加募集 2027",
+    "site:instagram.com インラインスピード 記録会 大会",
+    "site:facebook.com インラインスピード クラブ 大会",
+    "site:x.com インラインスピード 記録会 募集",
+    "site:blogspot.com インラインスピード 大会",
+    "site:blog.jp インラインスピード 記録会"
   ],
   "rules": [
     "投稿日時は開催日として使わない",
@@ -71,5 +80,23 @@
     "findings": "Facebookに協会の募集投稿とクラブ等の参加報告を確認。Instagram検索結果はトップページに転送される例があり大会根拠には不採用。Xでは対象競技の有効な新規募集投稿を今回の検索で確認できず。全件不存在の意味ではない。",
     "new_verified_upcoming_events": 0,
     "limitations": "Facebook・Instagramの直接取得は失敗。検索インデックスで見える範囲のみ。定期実行は作成済み、初回の自動実行結果は未検証。"
+  },
+  "focus": "Speed inline skating first: track, road, marathon, ultra, regional time trials; exclude ice speed skating and unrelated disciplines.",
+  "discovery": {
+    "cadence_recommendation": "SNS/web discovery 2-3 times weekly; source discovery weekly; not yet automatically scheduled",
+    "sources": [
+      "official organizers",
+      "regional teams and clubs",
+      "public personal skater posts",
+      "venues and parks"
+    ],
+    "review": [
+      "Keep evidence URL and observed publication date",
+      "Confirm future event date, organizer and venue before publishing",
+      "Deduplicate against open/closed issues and approved events",
+      "Do not automatically promote a personal account to a trusted official source",
+      "Do not access login-required or private posts"
+    ],
+    "write_policy": "Batch candidate review; avoid creating GitHub issues for mere mentions, practice sessions, or ambiguous dates"
   }
 }
