@@ -24,13 +24,23 @@ def authorize(payload, issue):
 
 def add_approved(event, payload, path):
     data = json.loads(path.read_text())
-    if any(e['id'] == event['id'] for e in data):
-        raise ValueError('既に承認済みです。変更には別途レビューが必要です')
+    previous = next((e for e in data if e['id'] == event['id']), None)
+    if previous is not None:
+        if event.get('replaces_digest') != digest(previous):
+            raise ValueError('既に承認済みです。更新には現在のdigestを指定した再承認が必要です')
+        # Archive prior content and approval evidence; never erase its audit trail.
+        event['approval_history'] = list(previous.get('approval_history', [])) + [
+            {k: v for k, v in previous.items() if k != 'approval_history'}]
+    elif event.get('replaces_digest'):
+        raise ValueError('更新対象の承認済み大会がありません')
     event.update(status='approved', approved_by=payload['sender']['login'],
                  approval_comment_id=payload['comment']['id'],
                  approval_issue=payload['issue']['number'], approval_digest=digest(event),
                  approved_at=today_jst().isoformat())
-    data.append(event)
+    if previous is not None:
+        data[data.index(previous)] = event
+    else:
+        data.append(event)
     data.sort(key=lambda e: e['date_start'])
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\n')
 
@@ -68,3 +78,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

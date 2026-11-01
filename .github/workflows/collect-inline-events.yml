@@ -8,12 +8,11 @@ on:
     paths: ['scripts/**', 'tests/**', 'requirements.txt', 'events/sources.json', '.github/workflows/collect-inline-events.yml']
 permissions:
   contents: read
-  issues: write
 concurrency:
   group: inline-event-collection
   cancel-in-progress: false
 jobs:
-  collect:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -26,7 +25,23 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Website behavior checks
         run: node tests/test_site.js
+  collect:
+    needs: check
+    if: github.event_name != 'push'
+    permissions:
+      contents: write # Durable bounded-fetch ledger on collection-state only.
+      issues: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
       - name: Collect candidates from official and regional sources
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python scripts/collect_events.py
       - name: Create pending Issues and report all counts
         env:
@@ -43,3 +58,4 @@ jobs:
       - name: Fail visibly if collection never produced a report
         if: always()
         run: test -s reports/collection.json
+

@@ -14,6 +14,10 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
 from event_model import event_id, today_jst, PREFECTURES
+from polite_http import Client
+from collection_state import Ledger
+
+HTTP = None
 
 ROOT = Path(__file__).resolve().parents[1]
 DATE = re.compile(r'(?:(20\d{2})\s*年\s*)?(\d{1,2})\s*月\s*(\d{1,2})\s*日')
@@ -190,8 +194,7 @@ def parse_pdf_page(soup, source, warnings):
     if not link:
         raise ValueError('記録会要項PDFへのリンクなし')
     url = urljoin(source['url'], link['href'])
-    with urllib.request.urlopen(url, timeout=25) as response:
-        raw = response.read(2_000_001)
+    raw, _ = HTTP.get(url)
     if len(raw) > 2_000_000:
         raise ValueError('PDF上限2MBを超えました')
     reader = PdfReader(io.BytesIO(raw))
@@ -210,44 +213,51 @@ def parse_pdf_page(soup, source, warnings):
 
 def fetch_source(source):
     started = time.monotonic()
-    for attempt in range(2):
-        try:
-            req = urllib.request.Request(source['url'], headers={'User-Agent': 'InlineEvents/1.0 (+https://github.com/omochi-crypto/inline-skate-events)'})
-            with urllib.request.urlopen(req, timeout=25) as response:
-                raw = response.read(2_000_001)
-                if len(raw) > 2_000_000:
-                    raise ValueError('ページ上限2MBを超えました')
-                charset = response.headers.get_content_charset()
-                soup = BeautifulSoup(raw, 'html.parser', from_encoding=charset)
-            for tag in soup(['script', 'style', 'noscript']):
-                tag.decompose()
-            warnings = []
-            adapter = {'calendar': parse_calendar, 'cards': parse_cards, 'gia': parse_gia, 'articles': parse_articles, 'pdf_page': parse_pdf_page}[source['adapter']]
-            events = adapter(soup, source, warnings)
-            return events, {'id': source['id'], 'url': source['url'], 'ok': True,
-                            'extracted': len(events), 'warnings': warnings,
-                            'seconds': round(time.monotonic()-started, 2)}
-        except Exception as exc:
-            if attempt:
-                return [], {'id': source['id'], 'url': source['url'], 'ok': False,
-                            'extracted': 0, 'error': str(exc)[:300]}
-            time.sleep(1)
+    try:
+        if HTTP is None:
+            raise ValueError('Bounded HTTP client not initialized; no network access')
+        HTTP.begin(source)
+        raw, charset = HTTP.get(source['url'])
+        soup = BeautifulSoup(raw, 'html.parser', from_encoding=charset)
+        for tag in soup(['script', 'style', 'noscript']):
+            tag.decompose()
+        warnings = []
+        adapter = {'calendar': parse_calendar, 'cards': parse_cards, 'gia': parse_gia, 'articles': parse_articles, 'pdf_page': parse_pdf_page}[source['adapter']]
+        events = adapter(soup, source, warnings)
+        return events, {'id': source['id'], 'url': source['url'], 'ok': True,
+                        'extracted': len(events), 'warnings': warnings,
+                        'fetched_at': dt.datetime.now(dt.timezone.utc).isoformat(),
+                        'seconds': round(time.monotonic()-started, 2)}
+    except Exception as exc:
+        return [], {'id': source['id'], 'url': source['url'], 'ok': False,
+                    'extracted': 0, 'error': str(exc)[:300],
+                    'manual_review': any(word in str(exc) for word in ('robots', 'Cross-origin', 'budget', 'delay'))}
 
 
-def collect(sources, today=None):
+def collect(sources, today=None, fetcher=None):
     today = today or today_jst()
+    fetcher = fetcher or fetch_source
     all_events, results = [], []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-        for events, result in pool.map(fetch_source, sources):
-            all_events.extend(events)
-            results.append(result)
+    # Serial also bounds aggregate load; the HTTP client spaces same-host calls.
+    for source in sources:
+        events, result = fetcher(source)
+        all_events.extend(events)
+        results.append(result)
     # Same normalized title/date across sources deduplicates; retain all provenance.
     unique = {}
     for event in all_events:
         if event['id'] in unique:
             old = unique[event['id']]
             old['source_ids'] = sorted(set(old['source_ids'] + event['source_ids']))
+            old.setdefault('observations', []).append({k: event.get(k) for k in
+                ('source_url', 'official_url', 'date_start', 'date_end', 'venue', 'category', 'evidence')})
+            for key in ('date_end', 'venue', 'category', 'prefecture'):
+                if old.get(key) and event.get(key) and old[key] != event[key]:
+                    old.setdefault('conflicts', {})[key] = sorted(set(
+                        old.get('conflicts', {}).get(key, []) + [old[key], event[key]]))
         else:
+            event['observations'] = [{k: event.get(k) for k in
+                ('source_url', 'official_url', 'date_start', 'date_end', 'venue', 'category', 'evidence')}]
             unique[event['id']] = event
     events = sorted(unique.values(), key=lambda e: ({'speed': 0, 'marathon': 1}.get(e['category'], 3), e['date_start']))
     report = {'collected_at': dt.datetime.now().astimezone().isoformat(), 'today_jst': today.isoformat(),
@@ -255,13 +265,28 @@ def collect(sources, today=None):
               'upcoming': sum(e['date_end'] >= today.isoformat() for e in events),
               'historical': sum(e['date_end'] < today.isoformat() for e in events),
               'by_category': dict(Counter(e['category'] for e in events)),
-              'errors': sum(not r['ok'] for r in results), 'sources': results}
+              'errors': sum(not r['ok'] for r in results),
+              'incomplete': sum(bool(r.get('incomplete')) for r in results), 'sources': results}
     return events, report
 
 
 def main():
+    global HTTP
     sources = json.loads((ROOT/'events/sources.json').read_text())['sources']
-    events, report = collect(sources)
+    ledger = Ledger()
+    due = ledger.reserve(sources)  # Must persist successfully BEFORE external GET.
+    HTTP = Client(ledger.data['hosts'])
+    def bounded_source(source):
+        if source['id'] not in due:
+            return ledger.cached(source)
+        events, result = fetch_source(source)
+        ledger.finish(source, events, result)
+        return events, result
+    events, report = collect(sources, fetcher=bounded_source)
+    report['http_requests'] = HTTP.metrics
+    # If this fails, the previously saved pending reservations stop later retries.
+    if due:
+        ledger.save('Record source observations and pause restricted hosts')
     (ROOT/'events/candidates.json').write_text(json.dumps(events, ensure_ascii=False, indent=2)+'\n')
     (ROOT/'reports').mkdir(exist_ok=True)
     (ROOT/'reports/collection.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
@@ -269,3 +294,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

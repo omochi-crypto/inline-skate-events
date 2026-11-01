@@ -5,40 +5,46 @@
       "url": "https://worldskatejapan.or.jp/speed/speed_competition/",
       "category": "speed",
       "priority": "high",
-      "adapter": "cards"
+      "adapter": "cards",
+      "min_interval_seconds": 172800
     },
     {
       "id": "wsj-freestyle",
       "url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
       "category": "freestyle",
-      "adapter": "cards"
+      "adapter": "cards",
+      "min_interval_seconds": 172800
     },
     {
       "id": "wsj-calendar",
       "url": "https://worldskatejapan.or.jp/about/schedule/",
       "category": "multi",
-      "adapter": "calendar"
+      "adapter": "calendar",
+      "min_interval_seconds": 172800
     },
     {
       "id": "wsj-marathon",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/marathon/",
       "category": "marathon",
       "priority": "high",
-      "adapter": "cards"
+      "adapter": "cards",
+      "min_interval_seconds": 604800
     },
     {
       "id": "wsj-track",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/track/",
       "category": "speed",
       "priority": "high",
-      "adapter": "cards"
+      "adapter": "cards",
+      "min_interval_seconds": 604800
     },
     {
       "id": "wsj-road",
       "url": "https://worldskatejapan.or.jp/speed_competition_tp_category/road-circuit/",
       "category": "speed",
       "priority": "high",
-      "adapter": "cards"
+      "adapter": "cards",
+      "min_interval_seconds": 604800
     },
     {
       "id": "gifu-association",
@@ -46,7 +52,9 @@
       "category": "speed",
       "adapter": "gia",
       "prefecture": "岐阜県",
-      "priority": "high"
+      "priority": "high",
+      "min_interval_seconds": 604800,
+      "small_site": true
     },
     {
       "id": "yodogawa-club",
@@ -54,7 +62,9 @@
       "category": "speed",
       "adapter": "articles",
       "selector": ".article-inner",
-      "priority": "regional"
+      "priority": "regional",
+      "min_interval_seconds": 604800,
+      "small_site": true
     },
     {
       "id": "itami-association",
@@ -63,7 +73,8 @@
       "prefecture": "兵庫県",
       "adapter": "pdf_page",
       "selector": "body",
-      "priority": "regional"
+      "priority": "regional",
+      "min_interval_seconds": 172800
     }
   ]
 }

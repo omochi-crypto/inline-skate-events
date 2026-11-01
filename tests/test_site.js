@@ -69,5 +69,8 @@ const base={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',cate
     assert.ok(flyerCard.children.some(e=>e.textContent===text));
   assert.ok(flyerCard.children.some(e=>e.textContent.startsWith('雨天延期：')));
   assert.equal(flyerCard.children.find(e=>e.tag==='ul').children[0].textContent,'300m・1,000m・3,000m');
+  const cancelled=setup([{...base,title:'中止確認の架空大会',cancelled:true}]);await new Promise(setImmediate);
+  assert.ok(cancelled.nodes.events.children[0].children.some(e=>e.textContent==='開催中止（確認済み）'));
   console.log('Site checks passed: filtering, dates, pending/expired exclusion, text safety, empty/error states.');
 })().catch(e=>{console.error(e);process.exit(1);});
+

@@ -12,7 +12,8 @@ CATEGORIES = {'speed', 'marathon', 'freestyle', 'hockey', 'other', 'multi'}
 FIELDS = ('id', 'title', 'date_start', 'date_end', 'category', 'prefecture',
           'official_url', 'source_url', 'venue', 'registration_deadline',
           'source_type', 'source_note', 'attachment_sha256', 'start_time', 'postponed_date',
-          'registration_note', 'participation_fee', 'details', 'organizer')
+          'registration_note', 'participation_fee', 'details', 'organizer',
+          'replaces_digest', 'cancelled')
 PREFECTURES = ('北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 '
                '埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 '
                '岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 '
@@ -49,6 +50,10 @@ def validate(event, today=None, require_future=True):
         if not ok:
             raise ValueError(msg)
     need(isinstance(event, dict), '大会JSONはobjectが必要です')
+    if 'replaces_digest' in event:
+        need(bool(re.fullmatch(r'[a-f0-9]{16}', str(event['replaces_digest']))), '更新前digestが不正です')
+    if 'cancelled' in event:
+        need(type(event['cancelled']) is bool, '中止フラグはbooleanが必要です')
     need(bool(re.fullmatch(r'[a-f0-9]{16}', str(event.get('id', '')))), 'IDが不正です')
     title = event.get('title')
     need(isinstance(title, str) and 5 <= len(title.strip()) <= 180, '大会名は5～180文字が必要です')
@@ -82,3 +87,4 @@ def validate(event, today=None, require_future=True):
     if event.get('registration_deadline'):
         need(dt.date.fromisoformat(event['registration_deadline']) <= end, '申込締切が終了日より後です')
     return publish_fields(event)
+

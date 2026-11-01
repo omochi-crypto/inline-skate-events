@@ -2,9 +2,11 @@
 import json
 import os
 import re
+import hashlib
 from pathlib import Path
 from event_model import digest, today_jst
 from github_api import api, all_pages
+from review_changes import records, classify
 
 ROOT = Path(__file__).resolve().parents[1]
 MARKER = '<!-- inline-event:'
@@ -31,9 +33,18 @@ def main():
         seen.update(re.findall(r'inline-event:([a-f0-9]{16})', issue.get('body') or ''))
         seen.update(re.findall(r'\[大会候補\]\s+([a-f0-9]{16})', issue.get('title', '')))
     counts = {'created': 0, 'existing_duplicates': 0, 'historical_skipped': 0, 'deferred': 0}
+    approved = json.loads((ROOT/'events/approved.json').read_text())
+    known = records(issues, approved)
+    reviews = []
     for event in candidates:
+        kind, detail = classify(event, known)
         if event['date_end'] < today_jst().isoformat():
             counts['historical_skipped'] += 1
+        elif kind in ('important_change', 'possible_duplicate', 'conflict'):
+            reviews.append({'kind': kind, **detail})
+            counts['existing_duplicates'] += int(kind == 'important_change')
+        elif kind == 'duplicate':
+            counts['existing_duplicates'] += 1
         elif event['id'] in seen:
             counts['existing_duplicates'] += 1
         elif counts['created'] >= 20:
@@ -42,17 +53,22 @@ def main():
             api('/issues', 'POST', {'title': f'[大会候補] {event["id"]} {event["title"]}'[:240],
                                    'body': candidate_body(event)})
             seen.add(event['id'])
+            known[event['id']] = {'event': event, 'issue': None, 'state': 'pending'}
             counts['created'] += 1
     report['issues'] = counts
+    report['review_required'] = reviews
+    (ROOT/'reports/review-required.json').write_text(json.dumps(reviews, ensure_ascii=False, indent=2)+'\n')
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
     summary = ['## 大会情報収集結果', '',
         f'抽出 **{report["extracted"]}** / 一意 **{report["unique"]}** / 収集元間重複 **{report["duplicates"]}**',
         f'今後 **{report["upcoming"]}** / 開催済み **{report["historical"]}** / エラー **{report["errors"]}**',
         f'Issue新規 **{counts["created"]}** / 既存重複 **{counts["existing_duplicates"]}** / 次回繰越 **{counts["deferred"]}**',
+        f'重要変更・重複疑い・情報衝突 **{len(reviews)}** / 未取得等 **{report.get("incomplete", 0)}**',
         '', '未承認の大会は公開していません。詳細JSONはArtifactsのcollection-reportから取得できます。', '',
         '|収集元|抽出件数|状態|日付等の要確認|', '|---|---:|---|---:|']
     for source in report['sources']:
-        summary.append(f'|{source["id"]}|{source["extracted"]}|{"OK" if source["ok"] else source.get("error", "ERROR")}|{len(source.get("warnings", []))}|')
+        state = source.get('error') or ('未取得/保留' if source.get('incomplete') else '保存済み再利用' if source.get('cached') else 'OK')
+        summary.append(f'|{source["id"]}|{source["extracted"]}|{state}|{len(source.get("warnings", []))}|')
     content = '\n'.join(summary)+'\n'
     (ROOT/'reports/summary.md').write_text(content)
     if os.getenv('GITHUB_STEP_SUMMARY'):
@@ -64,12 +80,18 @@ def main():
     failures = [s for s in report['sources'] if not s['ok']]
     if failures:
         detail = json.dumps(failures, ensure_ascii=False, indent=2)
+        fingerprint = hashlib.sha256(json.dumps(
+            sorted((s['id'], s.get('error', 'ERROR')) for s in failures), ensure_ascii=False).encode()).hexdigest()[:16]
+        marker = f'<!-- failure-digest:{fingerprint} -->'
         body = f'実行: {os.getenv("GITHUB_SERVER_URL", "https://github.com")}/{os.getenv("GITHUB_REPOSITORY")}/actions/runs/{os.getenv("GITHUB_RUN_ID")}\n\n```json\n{detail}\n```'
         if live:
-            api(f'/issues/{live["number"]}/comments', 'POST', {'body': body})
+            if marker not in (live.get('body') or ''):
+                api(f'/issues/{live["number"]}/comments', 'POST', {'body': body})
+                original = re.sub(r'<!-- failure-digest:[a-f0-9]+ -->', '', live.get('body') or '')
+                api(f'/issues/{live["number"]}', 'PATCH', {'body': original.rstrip()+'\n\n'+marker})
         else:
-            api('/issues', 'POST', {'title': title, 'body': body})
-    elif live:
+            api('/issues', 'POST', {'title': title, 'body': body+'\n\n'+marker})
+    elif live and not report.get('incomplete'):
         api(f'/issues/{live["number"]}/comments', 'POST', {'body': '全収集元の取得が正常に復旧しました。過去のエラー履歴は保持します。'})
         api(f'/issues/{live["number"]}', 'PATCH', {'state': 'closed'})
     if report['errors']:
@@ -77,3 +99,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

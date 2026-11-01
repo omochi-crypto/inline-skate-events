@@ -16,7 +16,7 @@ GitHub Actionsがチャットの返答を直接読み取る連携ではありま
 
 GitHubから直接操作する場合の代替手段として、Issueの `/preview` と `/approve <承認コード>` も利用できます。
 
-ラベル変更やIssueを閉じるだけでは公開しません。bot、所有者以外、古い承認コード、開催済み大会、不正なURL、不足項目は拒否します。再承認・内容変更は自動上書きしません。
+ラベル変更やIssueを閉じるだけでは公開しません。bot、所有者以外、古い承認コード、開催済み大会、不正なURL、不足項目は拒否します。内容変更は自動上書きしません。更新前digestを指定し、変更内容について再承認された場合だけ更新します。
 Actionsの「Approve reviewed inline event」の手動実行は**検証専用**で、公開は行いません。
 
 ## 公開先とLINE
@@ -35,6 +35,8 @@ LINEへの送信やLINEログインは必要ありません。スマートフォ
 - 抽出件数・一意件数・収集元間の重複件数
 - 今後の大会・開催済み大会の件数
 - Issueの新規件数・既存重複・次回繰越
+- 既存大会の重要変更・別名/改期候補・情報衝突（review-required.json）
+- 保存済み結果の再利用・取得保留・HTTPリクエスト数と転送量
 - 収集元ごとの取得成否・日付不明などの要確認件数
 
 Artifacts `collection-report-<run_id>` に全候補JSON、`collection.json`、Summaryを90日保存します。
@@ -50,7 +52,7 @@ Artifacts `collection-report-<run_id>` に全候補JSON、`collection.json`、Su
 ブログの開催年を記事年から補う場合は候補に注記し、人間による確認を必要とします。開催済み大会を翌年に繰り上げて扱いません。
 地方の未対応サイト・取得制限・旧ドメインの状況は `events/regional-source-watchlist.json` に記録します。
 
-収集元には同時アクセス3件、25秒のタイムアウト、1回の再試行、HTML/PDFサイズ上限を設けています。
+収集は逐次実行し、同一ホストは応答終了から最低10秒空けます。25秒のタイムアウト・自動再試行なし・HTML/PDFサイズ上限を設けています。小規模ブログは7日以上空け、移行時は1週間の静穏期間を置きます。取得予約と結果は collection-state ブランチへ保存し、取得済み結果を再利用します。push時はオフラインテストだけを行います。詳細は [取得方針](docs/collection-policy.md) を参照してください。
 抽出断片は要確認の証拠として候補にのみ保存します。公開用データに自動転送しません。
 
 ## 開発と検証
@@ -74,3 +76,4 @@ python -m http.server 8000 --directory public
 ## SNSの補完調査
 
 公開SNSの情報は、ChatGPTの定期検索で公式サイト収集を補います。検索対象と取得制約は [events/social-sources.json](events/social-sources.json)、運用は [docs/social-monitoring.md](docs/social-monitoring.md) を参照してください。新規候補は取得元リンク付きでチャットに提示し、利用者の「はい／いいえ」の判断を受けるまで公開しません。
+
