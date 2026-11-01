@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27",
+  "checked_at": "2026-11-01",
   "sources": [
     {
       "name": "岐阜県インラインスケート協会",
@@ -42,6 +42,16 @@
       "url": "https://inlineskate-yodogawa.blog.jp/",
       "status": "active_limited",
       "note": "記事単位に分離。日付が画像や省略表記のみの場合は警告として残す。練習会は大会扱いしない"
+    },
+    {
+      "name": "Team BLIZZARD（ブリザードクラブ）",
+      "url": "https://blizzardtokyo.blogspot.com/",
+      "status": "approved_discovery",
+      "category": "speed",
+      "prefecture": "東京都",
+      "competition_page": "https://blizzardtokyo.blogspot.com/search/label/Competition",
+      "info_page": "https://blizzardtokyo.blogspot.com/search/label/Info",
+      "note": "利用者の追加依頼に基づき情報源として採用。大会日程・大会報告が掲載される。練習予定と大会を分離し、開催情報は主催者の要項で再照合。GitHub Actionsの自動取得先には未追加。"
     }
   ]
 }
