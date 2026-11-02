@@ -44,6 +44,21 @@
       "identity_evidence": "文京区スポーツ協会の加盟団体一覧が当該Facebookを連盟Webサイトとして掲載",
       "access_status": "search_discovery; direct timeline not validated",
       "priority": 3
+    },
+    {
+      "id": "wsj-speed-facebook",
+      "platform": "facebook",
+      "name": "ワールドスケートジャパン スピード競技告知（JRSFSpeed）",
+      "url": "https://www.facebook.com/JRSFSpeed",
+      "evidence_url": "https://worldskatejapan.or.jp/speed/speed_comspeed/speed_competition/the-31th-marathon_202026/petition/the-30th-national-roller-skate-marathon/",
+      "identity_evidence": "WSJの第31回全国ローラースケートマラソン大会個別ページが、荒天時の中止告知先として当該Facebook URLを明示。ページ名だけから公式性を判断しない。",
+      "access_status": "search-index discovery only; direct timeline access not validated",
+      "priority": 1,
+      "approved_at": "2026-11-02",
+      "approval_basis": "利用者がチャットでFacebookのJRSFスピードを調査先として登録するよう明示指示",
+      "collection_policy": "公開検索で見える投稿のみを調査。タイムライン直接巡回・ログイン・非公開情報取得・取得制限回避はしない。Actionsの直接取得対象には追加しない。",
+      "verification_policy": "投稿日時と開催日を区別し、投稿ごとに主催者の当該年資料で確認。情報源採用を大会掲載の承認としない。",
+      "evidence_checked_at": "2026-11-02"
     }
   ],
   "queries": [
@@ -62,7 +77,8 @@
     "site:facebook.com インラインスピード クラブ 大会",
     "site:x.com インラインスピード 記録会 募集",
     "site:blogspot.com インラインスピード 大会",
-    "site:blog.jp インラインスピード 記録会"
+    "site:blog.jp インラインスピード 記録会",
+    "site:facebook.com/JRSFSpeed 大会 開催 要項 中止 延期"
   ],
   "rules": [
     "投稿日時は開催日として使わない",
