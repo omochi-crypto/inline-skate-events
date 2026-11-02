@@ -20,7 +20,7 @@ from github_api import all_pages
 SOURCE = {'id': 'test', 'url': 'https://example.org/', 'category': 'speed'}
 EVENT = {'id': '1234567890abcdef', 'title': '第9回スプリント選手権大会',
          'date_start': '2099-03-07', 'date_end': '2099-03-07', 'category': 'speed',
-         'prefecture': '東京都', 'official_url': 'https://example.org/event', 'source_url': 'https://example.org/'}
+         'prefecture': '東京都', 'venue': '東京都の架空会場', 'official_url': 'https://example.org/event', 'source_url': 'https://example.org/'}
 
 def soup(html):
     return BeautifulSoup(html, 'html.parser')
@@ -184,3 +184,4 @@ class PageMarkupTests(unittest.TestCase):
         self.assertEqual(parser.values, ['', 'speed', 'marathon', 'freestyle', 'hockey', 'other', 'multi'])
 
 if __name__ == '__main__':unittest.main()
+

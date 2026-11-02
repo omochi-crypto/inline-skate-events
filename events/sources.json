@@ -6,21 +6,24 @@
       "category": "speed",
       "priority": "high",
       "adapter": "cards",
-      "min_interval_seconds": 172800
+      "min_interval_seconds": 172800,
+      "small_site": false
     },
     {
       "id": "wsj-freestyle",
       "url": "https://worldskatejapan.or.jp/aggressive_inline/aggressive_inline_competition/",
       "category": "freestyle",
       "adapter": "cards",
-      "min_interval_seconds": 172800
+      "min_interval_seconds": 172800,
+      "small_site": false
     },
     {
       "id": "wsj-calendar",
       "url": "https://worldskatejapan.or.jp/about/schedule/",
       "category": "multi",
       "adapter": "calendar",
-      "min_interval_seconds": 172800
+      "min_interval_seconds": 172800,
+      "small_site": false
     },
     {
       "id": "wsj-marathon",
@@ -28,7 +31,8 @@
       "category": "marathon",
       "priority": "high",
       "adapter": "cards",
-      "min_interval_seconds": 604800
+      "min_interval_seconds": 604800,
+      "small_site": false
     },
     {
       "id": "wsj-track",
@@ -36,7 +40,8 @@
       "category": "speed",
       "priority": "high",
       "adapter": "cards",
-      "min_interval_seconds": 604800
+      "min_interval_seconds": 604800,
+      "small_site": false
     },
     {
       "id": "wsj-road",
@@ -44,7 +49,8 @@
       "category": "speed",
       "priority": "high",
       "adapter": "cards",
-      "min_interval_seconds": 604800
+      "min_interval_seconds": 604800,
+      "small_site": false
     },
     {
       "id": "gifu-association",
@@ -74,7 +80,8 @@
       "adapter": "pdf_page",
       "selector": "body",
       "priority": "regional",
-      "min_interval_seconds": 172800
+      "min_interval_seconds": 172800,
+      "small_site": false
     }
   ]
 }

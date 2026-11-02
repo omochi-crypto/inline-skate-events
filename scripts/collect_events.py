@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Bounded, auditable collection. Candidates never enter approved.json."""
-import concurrent.futures
 import datetime as dt
 import json
+import os
 import io
 import re
 import time
@@ -16,6 +16,8 @@ from pypdf import PdfReader
 from event_model import event_id, today_jst, PREFECTURES
 from polite_http import Client
 from collection_state import Ledger
+from source_policy import validate_sources
+import copy
 
 HTTP = None
 
@@ -241,23 +243,34 @@ def collect(sources, today=None, fetcher=None):
     # Serial also bounds aggregate load; the HTTP client spaces same-host calls.
     for source in sources:
         events, result = fetcher(source)
-        all_events.extend(events)
+        observations = copy.deepcopy(events)
+        for event in observations:
+            event['observation_incomplete'] = not result.get('ok', False) or bool(result.get('incomplete'))
+            event['observation_fetched_at'] = result.get('fetched_at')
+        all_events.extend(observations)
         results.append(result)
     # Same normalized title/date across sources deduplicates; retain all provenance.
     unique = {}
+    observation_fields = ('source_url', 'official_url', 'date_start', 'date_end', 'venue',
+                          'category', 'evidence', 'observation_incomplete', 'observation_fetched_at')
     for event in all_events:
+        evidence = {k: event.get(k) for k in observation_fields}
         if event['id'] in unique:
             old = unique[event['id']]
-            old['source_ids'] = sorted(set(old['source_ids'] + event['source_ids']))
-            old.setdefault('observations', []).append({k: event.get(k) for k in
-                ('source_url', 'official_url', 'date_start', 'date_end', 'venue', 'category', 'evidence')})
-            for key in ('date_end', 'venue', 'category', 'prefecture'):
-                if old.get(key) and event.get(key) and old[key] != event[key]:
-                    old.setdefault('conflicts', {})[key] = sorted(set(
-                        old.get('conflicts', {}).get(key, []) + [old[key], event[key]]))
+            # A failed cached observation must not displace a usable observation.
+            if old.get('observation_incomplete') and not event.get('observation_incomplete'):
+                event['observations'] = old.get('observations', [])
+                old, event = event, old
+                unique[old['id']] = old
+            old['source_ids'] = sorted(set(old.get('source_ids', []) + event.get('source_ids', [])))
+            old.setdefault('observations', []).append(evidence)
+            if not old.get('observation_incomplete') and not event.get('observation_incomplete'):
+                for key in ('date_end', 'venue', 'category', 'prefecture'):
+                    if old.get(key) and event.get(key) and old[key] != event[key]:
+                        old.setdefault('conflicts', {})[key] = sorted(set(
+                            old.get('conflicts', {}).get(key, []) + [old[key], event[key]]))
         else:
-            event['observations'] = [{k: event.get(k) for k in
-                ('source_url', 'official_url', 'date_start', 'date_end', 'venue', 'category', 'evidence')}]
+            event['observations'] = [evidence]
             unique[event['id']] = event
     events = sorted(unique.values(), key=lambda e: ({'speed': 0, 'marathon': 1}.get(e['category'], 3), e['date_start']))
     report = {'collected_at': dt.datetime.now().astimezone().isoformat(), 'today_jst': today.isoformat(),
@@ -272,25 +285,51 @@ def collect(sources, today=None, fetcher=None):
 
 def main():
     global HTTP
-    sources = json.loads((ROOT/'events/sources.json').read_text())['sources']
-    ledger = Ledger()
-    due = ledger.reserve(sources)  # Must persist successfully BEFORE external GET.
-    HTTP = Client(ledger.data['hosts'])
-    def bounded_source(source):
-        if source['id'] not in due:
-            return ledger.cached(source)
-        events, result = fetch_source(source)
-        ledger.finish(source, events, result)
-        return events, result
-    events, report = collect(sources, fetcher=bounded_source)
-    report['http_requests'] = HTTP.metrics
-    # If this fails, the previously saved pending reservations stop later retries.
-    if due:
-        ledger.save('Record source observations and pause restricted hosts')
-    (ROOT/'events/candidates.json').write_text(json.dumps(events, ensure_ascii=False, indent=2)+'\n')
-    (ROOT/'reports').mkdir(exist_ok=True)
-    (ROOT/'reports/collection.json').write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
-    print(json.dumps(report, ensure_ascii=False))
+    HTTP = None
+    report_path = ROOT/'reports/collection.json'
+    report_path.parent.mkdir(exist_ok=True)
+    events = []
+    report = {'run_id':os.getenv('GITHUB_RUN_ID', 'local'),
+              'head_sha':os.getenv('GITHUB_SHA'), 'today_jst':today_jst().isoformat(),
+              'extracted':0, 'unique':0, 'duplicates':0, 'upcoming':0, 'historical':0,
+              'errors':0, 'incomplete':0, 'sources':[], 'phase':'initializing',
+              'safe_for_issue_write':False}
+    # A hard interruption must never upload the tracked historical snapshot as fresh output.
+    (ROOT/'events/candidates.json').write_text('[]\n')
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+    phase = 'configuration'
+    try:
+        sources = json.loads((ROOT/'events/sources.json').read_text())['sources']
+        validate_sources(sources)
+        phase = 'load_state'
+        ledger = Ledger()
+        phase = 'reserve_state'
+        due = ledger.reserve(sources)  # Must persist before external GET.
+        HTTP = Client(ledger.data['hosts'])
+        def bounded_source(source):
+            if source['id'] not in due:
+                return ledger.cached(source)
+            observations, result = fetch_source(source)
+            ledger.finish(source, observations, result)
+            return observations, result
+        phase = 'collect'
+        events, collected = collect(sources, fetcher=bounded_source)
+        report.update(collected)
+        report['http_requests'] = HTTP.metrics
+        phase = 'persist_results'
+        if due:
+            ledger.save('Record source observations and pause restricted hosts')
+        report.update(phase='completed', safe_for_issue_write=True)
+    except Exception as exc:
+        report.update(phase=phase, safe_for_issue_write=False,
+                      errors=max(1, report['errors']), failure=str(exc)[:300])
+        if HTTP is not None:
+            report['http_requests'] = HTTP.metrics
+        raise  # Authentication/ledger failures stop all remaining API writes.
+    finally:
+        (ROOT/'events/candidates.json').write_text(json.dumps(events, ensure_ascii=False, indent=2)+'\n')
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n')
+        print(json.dumps(report, ensure_ascii=False))
 
 if __name__ == '__main__':
     main()

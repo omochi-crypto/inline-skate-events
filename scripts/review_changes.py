@@ -5,7 +5,8 @@ from event_model import parse_body, event_id, digest, publish_fields, normalize
 
 def records(issues, approved):
     found = {}
-    for issue in issues:
+    # REST ordering is configurable; older duplicate Issues must not overwrite newer ones.
+    for issue in sorted(issues, key=lambda i: i.get('number', 0)):
         try:
             event = parse_body(issue.get('body') or '')
             keys = {event['id'], event_id(event['title'], event['date_start'])}
@@ -20,6 +21,9 @@ def records(issues, approved):
 
 
 def classify(event, known):
+    if event.get('observation_incomplete'):
+        return 'unverified_observation', {'id': event['id'], 'event': event,
+            'note': 'Cached data from failed/unverified collection; do not create or update an Issue'}
     prior = known.get(event['id']) or known.get(event_id(event['title'], event['date_start']))
     if event.get('conflicts'):
         return 'conflict', {'id': event['id'], 'conflicts': event['conflicts'], 'event': event}

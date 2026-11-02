@@ -27,6 +27,8 @@ def main():
     candidates = json.loads((ROOT/'events/candidates.json').read_text())
     report_path = ROOT/'reports/collection.json'
     report = json.loads(report_path.read_text())
+    if report.get('safe_for_issue_write') is False:
+        raise SystemExit('収集状態を確定できないためIssue操作を停止しました')
     issues = [i for i in all_pages('/issues?state=all') if 'pull_request' not in i]
     seen = set()
     for issue in issues:
@@ -40,7 +42,7 @@ def main():
         kind, detail = classify(event, known)
         if event['date_end'] < today_jst().isoformat():
             counts['historical_skipped'] += 1
-        elif kind in ('important_change', 'possible_duplicate', 'conflict'):
+        elif kind in ('important_change', 'possible_duplicate', 'conflict', 'unverified_observation'):
             reviews.append({'kind': kind, **detail})
             counts['existing_duplicates'] += int(kind == 'important_change')
         elif kind == 'duplicate':
