@@ -59,6 +59,21 @@
       "collection_policy": "公開検索で見える投稿のみを調査。タイムライン直接巡回・ログイン・非公開情報取得・取得制限回避はしない。Actionsの直接取得対象には追加しない。",
       "verification_policy": "投稿日時と開催日を区別し、投稿ごとに主催者の当該年資料で確認。情報源採用を大会掲載の承認としない。",
       "evidence_checked_at": "2026-11-02"
+    },
+    {
+      "id": "ovalpark-kawanishi-instagram",
+      "platform": "instagram",
+      "name": "オーバルパークかわにし",
+      "url": "https://www.instagram.com/ovalpark_kawanishi/",
+      "evidence_url": "https://www.town.nara-kawanishi.lg.jp/0000008828.html",
+      "identity_evidence": "川西町の公式施設ページが、公式Instagramとして@ovalpark_kawanishiを直接案内。施設の臨時休場情報の確認先としても指定。",
+      "access_status": "search-index discovery only; direct posts and timeline access not validated",
+      "priority": 2,
+      "approved_at": "2026-11-04",
+      "approval_basis": "利用者がチャットで施設公式ページとInstagramの2情報源を調査先に追加するよう明示指示",
+      "evidence_checked_at": "2026-11-04",
+      "collection_policy": "公開検索で見える範囲のみ。直接巡回、ログイン、非公開投稿取得、取得制限回避はしない。Actionsの直接取得先には追加しない。",
+      "verification_policy": "大会告知の継続性・投稿取得範囲は未確認。主催者の当該年要項で大会名・日付・会場・種目を照合し、施設の体験会や通常利用を大会と混同しない。情報源採用を大会掲載の承認としない。"
     }
   ],
   "queries": [
@@ -78,7 +93,9 @@
     "site:x.com インラインスピード 記録会 募集",
     "site:blogspot.com インラインスピード 大会",
     "site:blog.jp インラインスピード 記録会",
-    "site:facebook.com/JRSFSpeed 大会 開催 要項 中止 延期"
+    "site:facebook.com/JRSFSpeed 大会 開催 要項 中止 延期",
+    "site:town.nara-kawanishi.lg.jp \"オーバルパーク\" 大会 開催 競技",
+    "site:instagram.com/ovalpark_kawanishi 大会 記録会 中止 延期"
   ],
   "rules": [
     "投稿日時は開催日として使わない",
