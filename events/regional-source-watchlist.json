@@ -52,6 +52,19 @@
       "competition_page": "https://blizzardtokyo.blogspot.com/search/label/Competition",
       "info_page": "https://blizzardtokyo.blogspot.com/search/label/Info",
       "note": "利用者の追加依頼に基づき情報源として採用。大会日程・大会報告が掲載される。練習予定と大会を分離し、開催情報は主催者の要項で再照合。GitHub Actionsの自動取得先には未追加。"
+    },
+    {
+      "name": "オーバルパークかわにし（川西町公式施設ページ）",
+      "url": "https://www.town.nara-kawanishi.lg.jp/0000008828.html",
+      "status": "approved_discovery",
+      "category": "speed",
+      "prefecture": "奈良県",
+      "platform": "official_web",
+      "approved_at": "2026-11-04",
+      "approval_basis": "利用者がチャットで施設公式ページとInstagramの2情報源を調査先に追加するよう明示指示",
+      "identity_evidence": "川西町の公式ドメインに掲載されたインラインスピード専用トラックの施設案内。公式Instagramへのリンクも掲載。",
+      "checked_at": "2026-11-04",
+      "note": "会場・利用条件・施設側の告知を照合する補助情報源。公開検索と保存済み情報を優先。robots等の取得条件・共有取得履歴が未確認のためActionsの直接取得先には追加しない。体験会・マルシェ・通常練習を大会扱いしない。大会掲載は個別の明示承認が必要。"
     }
   ]
 }
