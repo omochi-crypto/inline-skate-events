@@ -95,7 +95,11 @@
     "site:blog.jp インラインスピード 記録会",
     "site:facebook.com/JRSFSpeed 大会 開催 要項 中止 延期",
     "site:town.nara-kawanishi.lg.jp \"オーバルパーク\" 大会 開催 競技",
-    "site:instagram.com/ovalpark_kawanishi 大会 記録会 中止 延期"
+    "site:instagram.com/ovalpark_kawanishi 大会 記録会 中止 延期",
+    "インラインスケート 交流会 合同滑走会 参加募集",
+    "インラインスケート フェス 親子 体験会 開催",
+    "site:instagram.com インラインスケート 交流 イベント",
+    "site:facebook.com インラインスケート 交流会 募集"
   ],
   "rules": [
     "投稿日時は開催日として使わない",
@@ -114,7 +118,7 @@
     "new_verified_upcoming_events": 0,
     "limitations": "Facebook・Instagramの直接取得は失敗。検索インデックスで見える範囲のみ。定期実行は作成済み、初回の自動実行結果は未検証。"
   },
-  "focus": "Speed inline skating first: track, road, marathon, ultra, regional time trials; exclude ice speed skating and unrelated disciplines.",
+  "focus": "Competition discovery prioritizes inline speed (track, road, marathon, ultra, regional time trials). Separately discover public inline-skating community events across disciplines; never count community events as competitions.",
   "discovery": {
     "cadence_recommendation": "SNS/web discovery 2-3 times weekly; source discovery weekly; not yet automatically scheduled",
     "sources": [
@@ -131,5 +135,39 @@
       "Do not access login-required or private posts"
     ],
     "write_policy": "Batch candidate review; avoid creating GitHub issues for mere mentions, practice sessions, or ambiguous dates"
+  },
+  "community_events": {
+    "enabled": true,
+    "report_category": "交流イベント",
+    "event_kind": "community",
+    "approved_at": "2026-11-04",
+    "approval_basis": "利用者が大会とは別のカテゴリーでインラインスケート交流イベント情報を収集するよう明示依頼",
+    "method": "ChatGPT scheduled public web search; report only, not an Actions crawler or public-site category",
+    "include": [
+      "一般参加を公募する交流会",
+      "合同滑走会・交流を目的とする単発合同練習",
+      "インラインスケートのフェス・交流を伴うデモイベント",
+      "単発の初心者体験会・親子イベント"
+    ],
+    "exclude": [
+      "非公開・会員内のみの集まり",
+      "一般参加募集のない通常練習",
+      "定期スクール・常設営業案内のみ",
+      "過去の参加報告",
+      "アイススケート・スケートボードのみ"
+    ],
+    "required_confirmation": [
+      "イベント名",
+      "年付き開催日・時間",
+      "都道府県・会場",
+      "主催者",
+      "インラインスケートを含む具体的内容",
+      "一般参加の可否・参加条件",
+      "申込方法・期限・費用（不明なら未確認と明記）",
+      "主催者の根拠URL"
+    ],
+    "report_policy": "大会、交流イベント、重要変更、情報源候補を別枠で報告し、件数も分ける。同一催事の競技・交流部門は関連を示して二重計上しない。競技目的の大会を交流イベントへ付け替えて再提案しない。未知の日付・会場・公開参加可否は保留。利用者の明示承認まで公開しない。",
+    "access_policy": "既存の取得間隔・拒否時停止・公開検索限定・私的情報不収集を維持し、無断で情報源や直接巡回を増やさない。",
+    "storage_limit": "event_kindは調査・報告上の区分。現行event_modelや公開JSONに未対応の値を投入しない。候補のGitHub登録・Web掲載対応は別途必要。"
   }
 }
