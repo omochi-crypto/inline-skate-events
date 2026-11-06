@@ -65,6 +65,36 @@
       "identity_evidence": "川西町の公式ドメインに掲載されたインラインスピード専用トラックの施設案内。公式Instagramへのリンクも掲載。",
       "checked_at": "2026-11-04",
       "note": "会場・利用条件・施設側の告知を照合する補助情報源。公開検索と保存済み情報を優先。robots等の取得条件・共有取得履歴が未確認のためActionsの直接取得先には追加しない。体験会・マルシェ・通常練習を大会扱いしない。大会掲載は個別の明示承認が必要。"
+    },
+    {
+      "name": "えぼしスポーツの里（公式イベント欄）",
+      "url": "https://www.sasebo-eboshi.net/blog/?Cate=1",
+      "prefecture": "長崎県",
+      "status": "approved_discovery",
+      "category": "community",
+      "platform": "official_web",
+      "approved_at": "2026-11-06",
+      "approval_basis": "2026-11-06の調査報告で採用推奨とした2件について利用者が追加を明示承認",
+      "checked_at": "2026-11-06",
+      "collection_policy": "既存の交流イベント定期調査内で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "identity_evidence": "施設公式サイトのイベント欄が、春・秋の催しに含まれるインラインスケート教室と申込方法を告知。",
+      "evidence_url": "https://www.sasebo-eboshi.net/blog/index.shtml?Month=2609",
+      "note": "一般公募の単発体験会を探す補助情報源。常設営業、定期教室、終了済み催事は候補外。"
+    },
+    {
+      "name": "東京都立海上公園 南部地区グループ（公式イベント欄）",
+      "url": "https://tokyo-south-seaside-parks.com/events/",
+      "prefecture": "東京都",
+      "status": "approved_discovery",
+      "category": "community",
+      "platform": "official_web",
+      "approved_at": "2026-11-06",
+      "approval_basis": "2026-11-06の調査報告で採用推奨とした2件について利用者が追加を明示承認",
+      "checked_at": "2026-11-06",
+      "collection_policy": "既存の交流イベント定期調査内で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "identity_evidence": "公園管理グループのイベント欄に、同グループ主催・やしおスケートパーク共催の体験会の日時、参加費、持ち物を掲載。",
+      "evidence_url": "https://tokyo-south-seaside-parks.com/event/%E3%82%A4%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%88%E4%BD%93%E9%A8%93%E4%BC%9A-11%E6%9C%88",
+      "note": "一般公募の単発交流・体験イベントを探す補助情報源。定期スクール・通常練習は候補外。"
     }
   ]
 }
