@@ -95,6 +95,21 @@
       "identity_evidence": "公園管理グループのイベント欄に、同グループ主催・やしおスケートパーク共催の体験会の日時、参加費、持ち物を掲載。",
       "evidence_url": "https://tokyo-south-seaside-parks.com/event/%E3%82%A4%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%88%E4%BD%93%E9%A8%93%E4%BC%9A-11%E6%9C%88",
       "note": "一般公募の単発交流・体験イベントを探す補助情報源。定期スクール・通常練習は候補外。"
+    },
+    {
+      "name": "岐阜県クリスタルパーク恵那スケート場（恵那市公式施設サイト）",
+      "url": "https://www.city.ena.lg.jp/skate/",
+      "status": "approved_discovery",
+      "category": "speed",
+      "prefecture": "岐阜県",
+      "platform": "official_web",
+      "approved_at": "2026-11-06",
+      "approval_basis": "利用者がクリスタルパーク恵那スケート場の公式サイトを調査先として追加するよう明示指示",
+      "identity_evidence": "恵那市公式サイト内の施設専用ページに新着情報、教室・イベント情報、施設案内を掲載。市の施設案内には冬季以外のインラインスケート利用が明記されている。",
+      "evidence_url": "https://www.city.ena.lg.jp/syougaigakushu_sports/sports/sportsshisetsu/3254.html",
+      "checked_at": "2026-11-06",
+      "collection_policy": "既存の定期調査内で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "note": "インラインスピード大会・記録会の開催日、会場、種目、募集要項、施設利用変更を補足し、主催者の当年資料と照合する。冬季の氷上スピードスケート、常設営業、通常練習は除外する。"
     }
   ]
 }
