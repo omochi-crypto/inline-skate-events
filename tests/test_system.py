@@ -148,13 +148,27 @@ class ApprovalTests(unittest.TestCase):
             (root/'events').mkdir();(root/'site').mkdir()
             path=root/'events/approved.json';path.write_text('[]')
             (root/'events/candidates.json').write_text('[{"secret":"pending"}]')
+            (root/'events/practices-approved.json').write_text('[]')
+            (root/'events/practice-candidates.json').write_text('[{"secret":"practice-pending"}]')
             (root/'site/index.html').write_text('<h1>test</h1>')
+            (root/'site/practices.html').write_text('<h1>test practices</h1>')
             add_approved(authorize(self.payload,self.issue),self.payload,path)
             build(root)
             data=json.loads((root/'public/approved.json').read_text())
             self.assertEqual(data[0]['approval_comment_id'],123)
             self.assertFalse((root/'public/candidates.json').exists())
+            self.assertFalse((root/'public/practice-candidates.json').exists())
+            self.assertEqual(json.loads((root/'public/practices-approved.json').read_text()), [])
+            self.assertTrue((root/'public/practices.html').exists())
             with self.assertRaises(ValueError):add_approved(copy.deepcopy(EVENT),self.payload,path)
+    def test_build_rejects_unapproved_practice_data(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'events').mkdir()
+            (root/'events/approved.json').write_text('[]')
+            (root/'events/practices-approved.json').write_text(
+                json.dumps([{**self.event, 'status':'approved'}]))
+            with self.assertRaises(ValueError):build(root)
+
     def test_build_rejects_unaudited_approved_data(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);(root/'events').mkdir()
