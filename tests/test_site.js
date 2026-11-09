@@ -71,6 +71,33 @@ const base={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',cate
   assert.equal(flyerCard.children.find(e=>e.tag==='ul').children[0].textContent,'300m・1,000m・3,000m');
   const cancelled=setup([{...base,title:'中止確認の架空大会',cancelled:true}]);await new Promise(setImmediate);
   assert.ok(cancelled.nodes.events.children[0].children.some(e=>e.textContent==='開催中止（確認済み）'));
+
+  // Practice listing is isolated from competition cards and excludes pending records.
+  const practiceHtml=fs.readFileSync('site/practices.html','utf8');
+  const practiceScript=practiceHtml.match(/<script>([\\s\\S]*?)<\\/script>/)[1];
+  function setupPractices(data,fail=false){
+    const nodes=Object.fromEntries(['discipline','prefecture','search','count','sessions'].map(k=>[k,new Element()]));
+    const context=vm.createContext({document:{getElementById:k=>nodes[k],createElement:t=>new Element(t)},Intl,Date,Set,Error,Object,URL,
+      fetch:async()=>{if(fail)throw Error('offline');return {ok:true,json:async()=>data};},location:{reload(){}}});
+    vm.runInContext(practiceScript,context);
+    return nodes;
+  }
+  const practiceBase={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',category:'speed',prefecture:'東京都',venue:'テスト公園'};
+  const practices=setupPractices([{...practiceBase,title:'<svg onload=alert(1)>',official_url:'javascript:alert(1)'},
+    {...practiceBase,title:'未承認練習',status:'pending'},{...practiceBase,title:'終了済み練習',date_start:'2000-01-01',date_end:'2000-01-01'}]);
+  await new Promise(setImmediate);
+  assert.equal(practices.sessions.children.length,1);
+  assert.equal(practices.sessions.children[0].children[1].textContent,'<svg onload=alert(1)>');
+  assert.equal(practices.sessions.children[0].children.filter(n=>n.tag==='a').length,0);
+  practices.discipline.value='hockey';practices.discipline.listeners.change();
+  assert.match(practices.sessions.children[0].textContent,/条件に合う練習会/);
+  const noPractices=setupPractices([]);await new Promise(setImmediate);
+  assert.match(noPractices.sessions.children[0].textContent,/掲載承認済みの練習会はありません/);
+  const practiceError=setupPractices([],true);await new Promise(setImmediate);
+  assert.match(practiceError.sessions.children[0].textContent,/読み込めません/);
+  assert.equal(practiceError.sessions.children[1].tag,'button');
+  assert.match(html,/href="\.\/practices\.html"/);
+
   console.log('Site checks passed: filtering, dates, pending/expired exclusion, text safety, empty/error states.');
 })().catch(e=>{console.error(e);process.exit(1);});
 
