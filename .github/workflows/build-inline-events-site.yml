@@ -2,7 +2,7 @@ name: Publish approved inline events site
 on:
   push:
     branches: [main]
-    paths: ['events/approved.json', 'site/**', 'scripts/build_site.py', 'scripts/event_model.py', '.github/workflows/build-inline-events-site.yml']
+    paths: ['events/approved.json', 'events/practices-approved.json', 'site/**', 'scripts/build_site.py', 'scripts/event_model.py', '.github/workflows/build-inline-events-site.yml']
   workflow_call:
   workflow_dispatch:
 permissions:
