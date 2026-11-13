@@ -74,7 +74,7 @@ const base={status:'approved',date_start:'2099-03-07',date_end:'2099-03-07',cate
 
   // Practice listing is isolated from competition cards and excludes pending records.
   const practiceHtml=fs.readFileSync('site/practices.html','utf8');
-  const practiceScript=practiceHtml.match(/<script>([\\s\\S]*?)<\\/script>/)[1];
+  const practiceScript=practiceHtml.match(/<script>([\s\S]*?)<\/script>/)[1];
   function setupPractices(data,fail=false){
     const nodes=Object.fromEntries(['discipline','prefecture','search','count','sessions'].map(k=>[k,new Element()]));
     const context=vm.createContext({document:{getElementById:k=>nodes[k],createElement:t=>new Element(t)},Intl,Date,Set,Error,Object,URL,
