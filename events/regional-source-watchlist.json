@@ -110,6 +110,36 @@
       "checked_at": "2026-11-06",
       "collection_policy": "既存の定期調査内で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
       "note": "インラインスピード大会・記録会の開催日、会場、種目、募集要項、施設利用変更を補足し、主催者の当年資料と照合する。冬季の氷上スピードスケート、常設営業、通常練習は除外する。"
+    },
+    {
+      "name": "日産スタジアム（公式イベントカレンダー）",
+      "url": "https://www.nissan-stadium.jp/calendar/",
+      "prefecture": "神奈川県",
+      "status": "approved_discovery",
+      "platform": "official_web",
+      "approved_at": "2026-11-14",
+      "approval_basis": "利用者が11月13日の調査報告で提案した2件の追加をチャットで明示承認",
+      "checked_at": "2026-11-13",
+      "collection_policy": "定期調査で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "category": "multi",
+      "identity_evidence": "日産スタジアム公式サイトの施設予定表に、2026インラインチャレンジin横浜の日程と中央広場を掲載。",
+      "evidence_url": "https://www.nissan-stadium.jp/calendar/?m=x",
+      "note": "新横浜公園でのインライン催事の日程・会場を照合する。競技種目、参加条件、開催変更は当年の主催者資料で確認する。"
+    },
+    {
+      "name": "クロスポ八王子店（公式インラインスケートレッスン一覧）",
+      "url": "https://cro-spo.com/lesson/inline-skating/",
+      "prefecture": "東京都",
+      "status": "approved_discovery",
+      "platform": "official_web",
+      "approved_at": "2026-11-14",
+      "approval_basis": "利用者が11月13日の調査報告で提案した2件の追加をチャットで明示承認",
+      "checked_at": "2026-11-13",
+      "collection_policy": "定期調査で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "category": "practice",
+      "identity_evidence": "施設公式サイトの個別レッスン案内に、開催時刻、対象年齢、料金と予約方法を掲載。",
+      "evidence_url": "https://cro-spo.com/lesson/4030/",
+      "note": "一般参加できる初心者向け基礎練習・親子体験を確認する。年付き公式カレンダーと個別告知を照合し、過年度ページや常設営業を除外する。"
     }
   ]
 }
