@@ -1,1 +1,109 @@
-[]
+[
+  {
+    "title": "稲城市ローラースポーツ連盟 インラインスケートレッスン",
+    "date_start": "2026-12-05",
+    "date_end": "2026-12-05",
+    "category": "other",
+    "prefecture": "東京都",
+    "venue": "狛江市民総合体育館",
+    "official_url": "https://note.com/mmskate/n/n4bc904653651",
+    "source_url": "https://note.com/mmskate/n/n4bc904653651",
+    "organizer": "稲城市ローラースポーツ連盟",
+    "start_time": "11:30",
+    "registration_note": "主催者案内のフォームから申込み。開催3日前までの入金で確定。定員5名。",
+    "participation_fee": "3,200円（レッスンと個人練習を含む）",
+    "details": [
+      "レッスン 11:30～12:30。主催者案内では、練習会全体は個人練習を含め3時間。",
+      "子ども・大人、初心者・経験者が対象。12歳以下は個人練習中に保護者の付き添いが必要。"
+    ],
+    "status": "approved",
+    "chat_approval": {
+      "decision": "approved",
+      "date": "2026-11-16",
+      "message": "1から4まで承認します。",
+      "reviewed_item": "1. 2026-12-05 狛江市民総合体育館"
+    },
+    "id": "0d6922f485dcaf1c",
+    "approval_digest": "0be066cfd68ab37c"
+  },
+  {
+    "title": "ひらつかシーテラス 初心者向けインラインスケート教室",
+    "date_start": "2026-12-06",
+    "date_end": "2026-12-06",
+    "category": "other",
+    "prefecture": "神奈川県",
+    "venue": "ひらつかシーテラス スポーツフィールド",
+    "official_url": "https://hiratsuka-seaterrace.com/event/event-674/",
+    "source_url": "https://hiratsuka-seaterrace.com/event/event-674/",
+    "organizer": "ひらつかシーテラス（施設公式案内）",
+    "registration_note": "公式案内の予約フォームから申込み。対象は5歳以上。",
+    "participation_fee": "1,500円／回。用具レンタル500円（希望者）。",
+    "details": [
+      "11:00～12:00、13:30～14:30、15:30～16:30。各回20名。",
+      "初心者向け。前に進む、止まるなどの基本動作を練習。"
+    ],
+    "status": "approved",
+    "chat_approval": {
+      "decision": "approved",
+      "date": "2026-11-16",
+      "message": "1から4まで承認します。",
+      "reviewed_item": "2. 2026-12-06 ひらつかシーテラス スポーツフィールド"
+    },
+    "id": "ea82c943514e2e5d",
+    "approval_digest": "904509da677db441"
+  },
+  {
+    "title": "稲城市ローラースポーツ連盟 インラインスケートレッスン",
+    "date_start": "2026-12-19",
+    "date_end": "2026-12-19",
+    "category": "other",
+    "prefecture": "東京都",
+    "venue": "ふれんど平尾 体育館",
+    "official_url": "https://note.com/mmskate/n/n4bc904653651",
+    "source_url": "https://note.com/mmskate/n/n4bc904653651",
+    "organizer": "稲城市ローラースポーツ連盟",
+    "start_time": "16:30",
+    "registration_note": "主催者案内のフォームから申込み。開催3日前までの入金で確定。定員5名。",
+    "participation_fee": "3,200円（レッスンと個人練習を含む）",
+    "details": [
+      "レッスン 16:30～17:30。主催者案内では、練習会全体は個人練習を含め3時間。",
+      "子ども・大人、初心者・経験者が対象。12歳以下は個人練習中に保護者の付き添いが必要。"
+    ],
+    "status": "approved",
+    "chat_approval": {
+      "decision": "approved",
+      "date": "2026-11-16",
+      "message": "1から4まで承認します。",
+      "reviewed_item": "3. 2026-12-19 ふれんど平尾 体育館"
+    },
+    "id": "a799dfc8e6882b33",
+    "approval_digest": "d98b804806ed71b3"
+  },
+  {
+    "title": "稲城市ローラースポーツ連盟 インラインスケートレッスン",
+    "date_start": "2026-12-26",
+    "date_end": "2026-12-26",
+    "category": "other",
+    "prefecture": "東京都",
+    "venue": "野村不動産いなぎアリーナ 2階レクリエーションルーム",
+    "official_url": "https://note.com/mmskate/n/n4bc904653651",
+    "source_url": "https://note.com/mmskate/n/n4bc904653651",
+    "organizer": "稲城市ローラースポーツ連盟",
+    "start_time": "09:00",
+    "registration_note": "主催者案内のフォームから申込み。開催3日前までの入金で確定。定員5名。",
+    "participation_fee": "3,200円（レッスンと個人練習を含む）",
+    "details": [
+      "レッスン 09:00～10:00。主催者案内では、練習会全体は個人練習を含め3時間。",
+      "子ども・大人、初心者・経験者が対象。12歳以下は個人練習中に保護者の付き添いが必要。"
+    ],
+    "status": "approved",
+    "chat_approval": {
+      "decision": "approved",
+      "date": "2026-11-16",
+      "message": "1から4まで承認します。",
+      "reviewed_item": "4. 2026-12-26 野村不動産いなぎアリーナ 2階レクリエーションルーム"
+    },
+    "id": "7b64252e0d36b812",
+    "approval_digest": "e3c30401a7be25ee"
+  }
+]

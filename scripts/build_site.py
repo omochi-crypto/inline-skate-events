@@ -2,9 +2,27 @@
 import json
 import os
 import shutil
+from datetime import date
 from pathlib import Path
 from event_model import validate, digest
 ROOT = Path(__file__).resolve().parents[1]
+
+def has_practice_approval(practice, owner):
+    if practice.get('approved_by') == owner and type(practice.get('approval_comment_id')) is int:
+        return True
+
+    chat = practice.get('chat_approval')
+    if not isinstance(chat, dict) or chat.get('decision') != 'approved':
+        return False
+    if not all(isinstance(chat.get(key), str) and chat[key].strip()
+               for key in ('message', 'reviewed_item', 'date')):
+        return False
+    try:
+        approved_on = date.fromisoformat(chat['date'])
+    except ValueError:
+        return False
+    return approved_on <= date.fromisoformat(practice['date_start'])
+
 
 def build(root=ROOT):
     data = json.loads((root/'events/approved.json').read_text())
@@ -27,8 +45,7 @@ def build(root=ROOT):
     for practice in practices:
         validate(practice, require_future=False)
         if (practice.get('status') != 'approved'
-                or practice.get('approved_by') != owner
-                or not isinstance(practice.get('approval_comment_id'), int)
+                or not has_practice_approval(practice, owner)
                 or practice.get('approval_digest') != digest(practice)
                 or practice['id'] in ids):
             raise ValueError('Missing/invalid practice approval audit or duplicate ID')
@@ -39,7 +56,11 @@ def build(root=ROOT):
     shutil.copy(root/'site/practices.html', public/'practices.html')
     # Explicit whitelist: candidates, evidence and operational reports are never deployed.
     (public/'approved.json').write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\n')
-    (public/'practices-approved.json').write_text(json.dumps(practices, ensure_ascii=False, indent=2)+'\n')
+    public_practices = [
+        {key: value for key, value in practice.items() if key != 'chat_approval'}
+        for practice in practices
+    ]
+    (public/'practices-approved.json').write_text(json.dumps(public_practices, ensure_ascii=False, indent=2)+'\n')
     (public/'.nojekyll').touch()
     print(f'Built approved-only site: {len(data)} events')
 
