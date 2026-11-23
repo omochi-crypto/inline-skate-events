@@ -152,6 +152,8 @@ class ApprovalTests(unittest.TestCase):
             (root/'events/practice-candidates.json').write_text('[{"secret":"practice-pending"}]')
             (root/'site/index.html').write_text('<h1>test</h1>')
             (root/'site/practices.html').write_text('<h1>test practices</h1>')
+            (root/'site/community-approved.json').write_text('[]')
+            (root/'site/community.html').write_text('<h1>test community</h1>\n<!-- COMMUNITY_EVENTS -->')
             add_approved(authorize(self.payload,self.issue),self.payload,path)
             build(root)
             data=json.loads((root/'public/approved.json').read_text())
@@ -160,6 +162,7 @@ class ApprovalTests(unittest.TestCase):
             self.assertFalse((root/'public/practice-candidates.json').exists())
             self.assertEqual(json.loads((root/'public/practices-approved.json').read_text()), [])
             self.assertTrue((root/'public/practices.html').exists())
+            self.assertTrue((root/'public/community.html').exists())
             with self.assertRaises(ValueError):add_approved(copy.deepcopy(EVENT),self.payload,path)
     def test_build_rejects_unapproved_practice_data(self):
         with tempfile.TemporaryDirectory() as temp:
