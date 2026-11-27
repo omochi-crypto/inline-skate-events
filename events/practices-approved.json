@@ -105,5 +105,32 @@
     },
     "id": "7b64252e0d36b812",
     "approval_digest": "e3c30401a7be25ee"
+  },
+  {
+    "title": "初心者ローラースケート教室（江戸川区・1月回）",
+    "date_start": "2027-01-11",
+    "date_end": "2027-01-11",
+    "category": "other",
+    "prefecture": "東京都",
+    "venue": "水辺のスポーツガーデン ローラーコート",
+    "official_url": "https://www.city.edogawa.tokyo.jp/e028/sports/sports/kensaku/mizube_roller.html",
+    "source_url": "https://www.edo-mizube.jp/eventguide/",
+    "organizer": "水辺のスポーツガーデン指定管理者 株式会社オーエンス",
+    "start_time": "10:00",
+    "registration_note": "江戸川区公式の「教室・イベント募集一覧」からオンライン申込。先着50名。掲載確認時は受付開始前。最新の受付状況は公式案内を確認してください。",
+    "participation_fee": "550円。レンタルはシューズ310円、プロテクター100円、ヘルメット無料。",
+    "details": [
+      "2027年1月11日（月・祝）10:00～12:00。一般参加できる初心者向けインラインスケート教室。講師は江戸川区ローラースケート連盟。",
+      "ヘルメット着用必須。用具の装着を見込み9:50ごろ来場。予備日なし。開催可否は施設の公式案内を確認してください。"
+    ],
+    "status": "approved",
+    "chat_approval": {
+      "decision": "approved",
+      "date": "2026-11-28",
+      "message": "1から2は保留。3は掲載",
+      "reviewed_item": "③ 2027-01-11 10:00～12:00 初心者ローラースケート教室（江戸川区・1月回） 水辺のスポーツガーデン ローラーコート"
+    },
+    "id": "8b50945dfe7b600b",
+    "approval_digest": "014c6f5f8b8f536d"
   }
 ]

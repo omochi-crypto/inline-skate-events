@@ -140,6 +140,21 @@
       "identity_evidence": "施設公式サイトの個別レッスン案内に、開催時刻、対象年齢、料金と予約方法を掲載。",
       "evidence_url": "https://cro-spo.com/lesson/4030/",
       "note": "一般参加できる初心者向け基礎練習・親子体験を確認する。年付き公式カレンダーと個別告知を照合し、過年度ページや常設営業を除外する。"
+    },
+    {
+      "name": "広島県インラインスケート協会（ブログ）",
+      "url": "https://ameblo.jp/agglom/theme-10028302237.html",
+      "prefecture": "広島県",
+      "status": "approved_discovery",
+      "platform": "blog",
+      "category": "practice",
+      "approved_at": "2026-11-28",
+      "approval_basis": "利用者が11月27日の情報源候補のうち、広島県インラインスケート協会のブログを採用するようチャットで明示指示",
+      "checked_at": "2026-11-28",
+      "collection_policy": "定期調査で公開検索と保存済み資料を使用。直接巡回・ログイン・取得制限の回避を行わず、GitHub Actionsの直接取得先には追加しない。",
+      "identity_evidence": "伊丹市立ローラースケート場のリンク集が協会のブログを紹介。協会のブログには東広島運動公園のフリーワークショップ等の告知実績がある。",
+      "evidence_url": "https://itami-roller.jp/link.html",
+      "note": "一般参加できる基礎講習・体験会の補助情報源。開催年・各回の参加条件・雨天対応を当該回の案内で確認する。スラローム講習や通常練習をスピード大会に分類しない。"
     }
   ]
 }
